@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎨 手绘风 · 雅思双人实时PK舱</title>
+    <title>🎨 手绘风 · 雅思双人强同步实时PK舱</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -31,7 +31,6 @@
         }
     </script>
     <style>
-        /* 强烈的粗糙线条手绘风格边框 */
         .hand-border {
             border: 3px solid #2B2A27;
             border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -40,19 +39,12 @@
             border: 2px solid #2B2A27;
             border-radius: 12px 4px 12px 4px/4px 12px 4px 12px;
         }
-        /* 拟真手绘阴影 */
-        .hand-shadow {
-            box-shadow: 5px 5px 0px 0px #2B2A27;
-        }
-        .hand-shadow-sm {
-            box-shadow: 3px 3px 0px 0px #2B2A27;
-        }
-        /* 交互微动效 */
+        .hand-shadow { box-shadow: 5px 5px 0px 0px #2B2A27; }
+        .hand-shadow-sm { box-shadow: 3px 3px 0px 0px #2B2A27; }
         .hand-btn:active {
             transform: translate(2px, 2px);
             box-shadow: 0px 0px 0px 0px #2B2A27;
         }
-        /* 3D 卡片翻转 */
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
@@ -66,8 +58,8 @@
         <div class="flex items-center gap-3">
             <div class="text-4xl text-sketch-accent"><i class="fa-solid fa-pencil"></i></div>
             <div>
-                <h1 class="text-3xl md:text-4xl font-hand font-bold tracking-wider">雅思单词 · 实时PK舱</h1>
-                <p class="text-base font-hand text-sketch-ink/70">"实时连线，并肩作战 ✏️ 限时 60 秒极限挑战"</p>
+                <h1 class="text-3xl md:text-4xl font-hand font-bold tracking-wider">雅思单词 · 真实时同步PK舱</h1>
+                <p class="text-base font-hand text-sketch-ink/70">"同屏同题、实时博弈 ✏️ 限时 60 秒极限对决"</p>
             </div>
         </div>
         <div id="user-badge" class="hidden bg-sketch-paper px-5 py-2.5 hand-border-sm hand-shadow-sm text-base font-hand font-bold">
@@ -84,13 +76,13 @@
         <section id="sec-login" class="block max-w-md w-full mx-auto my-auto p-8 bg-sketch-paper hand-border hand-shadow space-y-6">
             <div class="text-center space-y-2">
                 <div class="text-6xl text-sketch-sage font-hand"><i class="fa-solid fa-signature"></i></div>
-                <h2 class="text-2xl font-bold font-hand">起个独特的花名吧</h2>
-                <p class="text-sm text-sketch-ink/60">因为是线上实时连线，名字将作为你在星际太空中的唯一通信识别码（不可重复）。</p>
+                <h2 class="text-2xl font-bold font-hand">输入你的唯一花名</h2>
+                <p class="text-sm text-sketch-ink/60">名字将用于建立你们两人之间的专属实时通信信道。</p>
             </div>
             <div class="space-y-4">
                 <input type="text" id="username-input" placeholder="输入专属花名" class="w-full bg-sketch-bg p-4 hand-border-sm text-lg font-bold tracking-wide text-center focus:outline-none focus:border-sketch-accent transition-colors">
                 <button onclick="registerUser()" class="w-full hand-btn bg-sketch-sage hover:bg-sketch-sage text-white p-4 hand-border-sm hand-shadow-sm font-bold text-lg tracking-widest smooth-transition">
-                    锁定身份并进入 🚪
+                    进入背词与对战大厅 🚪
                 </button>
             </div>
         </section>
@@ -101,7 +93,7 @@
                     <i class="fa-solid fa-graduation-cap text-sketch-sky"></i> 单词自由背
                 </button>
                 <button onclick="switchTab('pk')" id="tab-pk" class="hand-btn py-2.5 px-8 bg-sketch-paper hand-border-sm hand-shadow-sm text-lg font-bold font-hand flex items-center gap-2 smooth-transition">
-                    <i class="fa-solid fa-gamepad text-sketch-accent"></i> 线上实时PK
+                    <i class="fa-solid fa-gamepad text-sketch-accent"></i> 线上实时同步PK
                 </button>
             </div>
 
@@ -145,15 +137,15 @@
                 <div id="pk-lobby" class="bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
                     <div class="text-center space-y-2">
                         <div class="text-6xl text-sketch-accent font-hand"><i class="fa-solid fa-wifi"></i></div>
-                        <h2 class="text-2xl md:text-3xl font-bold font-hand">P2P 实时联机竞技大厅</h2>
-                        <p class="text-base text-sketch-ink/70">利用高级 WebRTC 技术，无需后端中转。异地恋人跨越时空同屏大决战！</p>
+                        <h2 class="text-2xl md:text-3xl font-bold font-hand">强同步联机对战大厅</h2>
+                        <p class="text-base text-sketch-ink/70">这里是真正的同屏对决！你作答时，伴侣能实时看到你的进度反馈。</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                         <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
                             <div>
-                                <h3 class="font-bold font-hand text-lg text-sketch-accent"><i class="fa-solid fa-paper-plane"></i> 方案 A: 呼叫伴侣</h3>
-                                <p class="text-sm text-sketch-ink/60 mt-1">生成你的专属实时对战网址，微信或QQ发给对方即可一键连线。</p>
+                                <h3 class="font-bold font-hand text-lg text-sketch-accent"><i class="fa-solid fa-paper-plane"></i> 发起挑战</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">生成带有你名字的实时对战网址，伴侣点击即可瞬间跨时空进入房间。</p>
                             </div>
                             <button onclick="generateLiveInvite()" class="w-full hand-btn bg-sketch-accent text-white py-3 hand-border-sm hand-shadow-sm font-bold text-base tracking-wide">
                                 复制实时联机邀请
@@ -161,8 +153,8 @@
                         </div>
                         <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
                             <div>
-                                <h3 class="font-bold font-hand text-lg text-sketch-sage"><i class="fa-solid fa-headset"></i> 方案 B: 主动连线</h3>
-                                <p class="text-sm text-sketch-ink/60 mt-1">如果伴侣已经在线，直接在下方输入Ta当前登录的花名，呼叫对局。</p>
+                                <h3 class="font-bold font-hand text-lg text-sketch-sage"><i class="fa-solid fa-headset"></i> 应战大门</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">如果伴侣已经创建了房间，在下方输入Ta登录的花名，即可直接轰炸连线。</p>
                             </div>
                             <div class="flex gap-2">
                                 <input type="text" id="peer-id-input" placeholder="输入对方的名字" class="w-full bg-sketch-bg px-4 py-2 hand-border-sm text-sm font-bold focus:outline-none">
@@ -174,6 +166,12 @@
                     <div id="connection-status" class="bg-sketch-bg p-4 hand-border-sm text-sm font-hand text-center text-sketch-ink/60">
                         📡 当前云端通信雷达：正在等待连线指令...
                     </div>
+
+                    <div id="host-start-panel" class="hidden text-center pt-4">
+                        <button onclick="hostInitiateGame()" class="w-full hand-btn bg-sketch-ink text-white py-4 hand-border-sm hand-shadow font-bold text-lg tracking-widest">
+                            🔥 伴侣已就位，开启强同步对决！
+                        </button>
+                    </div>
                 </div>
 
                 <div id="pk-arena" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
@@ -181,6 +179,7 @@
                         <div>
                             <p class="text-sm text-sketch-ink/50 font-bold uppercase">我 (<span id="arena-my-name">Me</span>)</p>
                             <p id="arena-my-score" class="text-5xl font-bold text-sketch-sky font-mono mt-1">0</p>
+                            <p id="my-status-tag" class="text-xs text-sketch-sage mt-1 font-bold">思考中 ✏️</p>
                         </div>
                         <div class="space-y-1">
                             <span class="bg-sketch-accent text-white text-base px-3 py-1.5 hand-border-sm hand-shadow-sm font-bold tracking-widest animate-pulse" id="pk-timer-badge">60s</span>
@@ -189,6 +188,7 @@
                         <div>
                             <p class="text-sm text-sketch-ink/50 font-bold uppercase">伴侣 (<span id="arena-opp-name">Opp</span>)</p>
                             <p id="arena-opp-score" class="text-5xl font-bold text-sketch-accent font-mono mt-1">0</p>
+                            <p id="opp-status-tag" class="text-xs text-sketch-accent mt-1 font-bold">思考中 ✏️</p>
                         </div>
                     </div>
 
@@ -197,12 +197,16 @@
                     </div>
 
                     <div class="text-center py-4 space-y-2">
-                        <p class="text-xs font-hand text-sketch-ink/50 font-bold tracking-widest">请选择正确的中文翻译</p>
+                        <p class="text-xs font-hand text-sketch-ink/50 font-bold tracking-widest" id="sync-q-index">第 1 题</p>
                         <h3 id="pk-question" class="text-4xl font-bold font-hand text-sketch-ink">Meticulous</h3>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4" id="pk-options">
                         </div>
+
+                    <div id="arena-waiting-overlay" class="hidden text-center text-sm font-hand font-bold text-sketch-accent animate-bounce">
+                        💡 你已作答，正在苦苦等待对方下笔...
+                    </div>
                 </div>
 
                 <div id="pk-summary" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow text-center space-y-6">
@@ -211,17 +215,17 @@
 
                     <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto py-2">
                         <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
-                            <p class="text-sm font-hand font-bold text-sketch-ink/50">我的得分</p>
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">我的最终总分</p>
                             <p id="sum-my-score" class="text-4xl font-bold font-mono text-sketch-sky mt-1">0</p>
                         </div>
                         <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
-                            <p class="text-sm font-hand font-bold text-sketch-ink/50">对方得分</p>
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">对方最终总分</p>
                             <p id="sum-opp-score" class="text-4xl font-bold font-mono text-sketch-accent mt-1">0</p>
                         </div>
                     </div>
 
                     <button onclick="quitToLobby()" class="hand-btn bg-sketch-ink text-white px-10 py-3.5 hand-border-sm hand-shadow-sm text-base font-bold tracking-wider">
-                        返回竞技大厅
+                        返回大厅再次切磋
                     </button>
                 </div>
             </section>
@@ -233,78 +237,62 @@
     </footer>
 
     <script>
-        // 初始化为空数组，等待从同一目录下的 words.json 中异步动态抓取加载
         let wordList = []; 
 
-        // 全局状态控制变量
         let myRegisteredName = "";
         let currentStudyIdx = 0;
         let isCardFlipped = false;
 
-        // P2P 实时网络对战变量
+        // P2P 实时联机核心状态机
         let peer = null;
         let p2pConnection = null;
         let isHost = false;
         
         let pkTimer = null;
-        let pkTimeLeft = 60; // 限时 60 秒
+        let pkTimeLeft = 60; 
         let myPkScore = 0;
         let oppPkScore = 0;
         let currentPkCombo = 0;
-        let currentPkQuestion = null;
-        let pkWordsPool = [];
 
-        // 页面初始化：异步加载外置 JSON 词库
+        // 强同步核心状态控制
+        let currentQuestionData = null; // 当前回合题目详情
+        let matchQuestionIndices = [];   // 整局游戏的题目随机乱序链
+        let currentRoundNumber = 0;     // 当前第几题
+        let IHaveAnswered = false;       // 本回合我是否已选
+        let oppHasAnswered = false;      // 本回合对方是否已选
+        let myChoiceCorrect = false;     // 我这回合对了吗
+        let myChoiceGainedPoints = 0;    // 我这题加了多少分
+
         window.onload = async function() {
             try {
-                // 核心改动：从同级目录抓取异步词库
                 const response = await fetch('words.json');
-                if (!response.ok) throw new Error('未能成功加载 words.json，请确认文件是否存在。');
+                if (!response.ok) throw new Error('未能成功加载 words.json');
                 wordList = await response.json();
-                
                 showToast(`📚 雅思词库满血加载！共 ${wordList.length} 个单词`);
                 renderCard(); 
             } catch (e) {
                 console.error(e);
-                showToast("❌ 词库加载失败，请检查 words.json 文件是否存在且格式正确");
-                // 应急兜底词，确保空文件时网页不崩溃
-                wordList = [
-                    { word: "Meticulous", phonetic: "/məˈtɪkjələs/", translation: "一丝不苟的", example: "She was meticulous about her design.", exChn: "她对设计一丝不苟。" }
-                ];
+                showToast("❌ 词库加载失败，请确认 words.json 是否放在同级目录下。");
+                wordList = [{ word: "Meticulous", phonetic: "/mə/", translation: "一丝不苟", example: "Example", exChn: "例句" }];
                 renderCard();
             }
-
-            // 预填缓存的曾用名
             const saved = localStorage.getItem('love_pk_my_username');
-            if(saved) {
-                document.getElementById('username-input').value = saved;
-            }
+            if(saved) document.getElementById('username-input').value = saved;
         };
 
-        // 身份花名册唯一锁定逻辑
+        // 注册身份并挂载信令
         function registerUser() {
             const input = document.getElementById('username-input').value.trim();
-            if(!input) {
-                showToast("⚠️ 名字不能为空哦！");
-                return;
-            }
-            if(/[^a-zA-Z0-9\u4e00-\u9fa5]/.test(input)) {
-                showToast("⚠️ 请使用纯中文、英文或数字命名！");
-                return;
-            }
-
+            if(!input) { showToast("⚠️ 名字不能为空哦！"); return; }
             myRegisteredName = input;
             
-            // 拼接唯一识别前缀，规避全球 PeerJS 用户命名冲突
             const peerId = "love-vocab-2026-" + myRegisteredName;
-            
-            showToast("📡 正在连接云端通信信令塔...");
-            document.getElementById('connection-status').innerText = "📡 正在云端抢占注册唯一名字中...";
+            document.getElementById('connection-status').innerText = "📡 正在向宇宙信令塔注册唯一名字...";
 
             peer = new Peer(peerId);
 
-            peer.on('open', function(id) {
-                showToast("✨ 身份锁定成功！");
+            peer.on('open', function() {
+                showToast("✨ 身份全网唯一锁定！");
                 localStorage.setItem('love_pk_my_username', myRegisteredName);
                 
                 document.getElementById('sec-login').classList.add('hidden');
@@ -312,25 +300,20 @@
                 document.getElementById('user-badge').classList.remove('hidden');
                 document.getElementById('display-my-name').innerText = myRegisteredName;
                 document.getElementById('arena-my-name').innerText = myRegisteredName;
-                
                 document.getElementById('connection-status').innerText = `📡 房间待命中。名字: 【${myRegisteredName}】`;
                 
-                // 顺便解析链接中是否包含自动呼叫邀请
                 checkUrlInvitation();
             });
 
             peer.on('error', function(err) {
-                console.error(err);
                 if(err.type === 'unavailable-id') {
-                    showToast("❌ 这个名字已经被占用啦！请换个独一无二的。");
-                    document.getElementById('connection-status').innerText = "❌ 连线失败：名字全网重复。";
+                    showToast("❌ 这个名字伴侣或其他人正在使用！请换个独一无二的名字。");
+                    document.getElementById('connection-status').innerText = "❌ 注册失败：花名重复。";
                     peer.destroy();
-                } else {
-                    showToast("❌ 信令服务器握手失败: " + err.type);
                 }
             });
 
-            // 房东身份：监听来自伴侣的呼叫
+            // 作为房东被动迎接呼叫
             peer.on('connection', function(conn) {
                 p2pConnection = conn;
                 isHost = true;
@@ -338,105 +321,114 @@
             });
         }
 
-        // P2P 实时数据管道中转站
+        // 强同步数据传输总线
         function setupConnectionListeners() {
-            document.getElementById('connection-status').innerHTML = `⚡ 正在和伴侣 <strong>${p2pConnection.peer.replace("love-vocab-2026-", "")}</strong> 建立量子连线...`;
+            document.getElementById('connection-status').innerHTML = `⚡ 正在和伴侣建立通信物理连线...`;
             
             p2pConnection.on('open', function() {
-                showToast("⚔️ 联机成功！对战舱门已开启。");
                 const oppName = p2pConnection.peer.replace("love-vocab-2026-", "");
                 document.getElementById('arena-opp-name').innerText = oppName;
-                document.getElementById('connection-status').innerHTML = `🟩 已与 【${oppName}】 保持跨时空实时在线连接！`;
+                document.getElementById('connection-status').innerHTML = `🟩 已与 【${oppName}】 强连线成功！`;
                 
                 if(isHost) {
-                    generateAndSyncMatchPool();
+                    document.getElementById('host-start-panel').classList.remove('hidden');
                 }
             });
 
             p2pConnection.on('data', function(data) {
                 switch(data.type) {
-                    case 'INIT_POOL': 
-                        pkWordsPool = data.pool;
-                        sendData({type: 'READY_TO_START'});
+                    case 'HOST_START_GAME': // 客人接收到房东的开始指令与整局题目索引
+                        matchQuestionIndices = data.questionIndices;
+                        currentRoundNumber = 0;
+                        triggerStartPkGameView();
                         break;
-                    case 'READY_TO_START':
-                        if(isHost) {
-                            sendData({type: 'START_GAME'});
-                            triggerStartPkGame();
-                        }
+                    case 'NEXT_ROUND_DATA': // 强同步：接收本回合的题目和乱序选项
+                        currentQuestionData = data.roundData;
+                        currentRoundNumber = data.roundNumber;
+                        renderSyncQuestionUI();
                         break;
-                    case 'START_GAME':
-                        if(!isHost) triggerStartPkGame();
+                    case 'OPP_SUBMITTED':   // 强同步：接收对方已作答的实时状态
+                        oppHasAnswered = true;
+                        document.getElementById('opp-status-tag').innerText = "✍️ 已作答！";
+                        document.getElementById('opp-status-tag').classList.remove('text-sketch-ink/50');
+                        document.getElementById('opp-status-tag').classList.add('text-sketch-sage', 'animate-bounce');
+                        checkRoundResolution(); // 检查是不是两个人都选完了
                         break;
-                    case 'OPP_SCORE_UPDATE': 
-                        oppPkScore = data.score;
+                    case 'ROUND_SCORE_SYNC': // 强同步：回合结束时，接收对方本轮得分并更新
+                        oppPkScore = data.oppTotalScore;
                         document.getElementById('arena-opp-score').innerText = oppPkScore;
                         break;
-                    case 'GAME_OVER_SYNC': 
-                        oppPkScore = data.score;
+                    case 'FORCE_END_GAME':  // 接收到时间耗尽信号
                         handleMatchEnded();
                         break;
                 }
             });
 
             p2pConnection.on('close', function() {
-                showToast("📡 伴侣已断开连接。");
+                showToast("📡 伴侣离线，对战终止。");
                 quitToLobby();
             });
         }
 
         function sendData(obj) {
-            if(p2pConnection && p2pConnection.open) {
-                p2pConnection.send(obj);
-            }
+            if(p2pConnection && p2pConnection.open) p2pConnection.send(obj);
         }
 
-        // 发起邀请
-        function generateLiveInvite() {
-            if(!myRegisteredName) return;
-            const inviteUrl = `${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(myRegisteredName)}`;
-            navigator.clipboard.writeText(inviteUrl).then(() => {
-                showToast("📋 专属对战网址已成功复制！快发给异地伴侣点击！");
-            }).catch(() => {
-                prompt("请手动复制下方联机网址发给伴侣：", inviteUrl);
-            });
-        }
-
-        // 呼叫连线
-        function connectToPeerFromInput() {
-            const target = document.getElementById('peer-id-input').value.trim();
-            if(!target) { showToast("请输入对方当前的名字！"); return; }
-            if(target === myRegisteredName) { showToast("不能挑战自己哦！"); return; }
-            
-            const fullTargetId = "love-vocab-2026-" + target;
-            document.getElementById('connection-status').innerText = `🚀 正在全网搜寻并呼叫 【${target}】...`;
-            
-            p2pConnection = peer.connect(fullTargetId);
-            isHost = false;
-            setupConnectionListeners();
-        }
-
-        function checkUrlInvitation() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const invitePlayer = urlParams.get('invite');
-            if(invitePlayer && invitePlayer !== myRegisteredName) {
-                document.getElementById('peer-id-input').value = invitePlayer;
-                showToast(`🔔 侦测到来自 【${invitePlayer}】 的挑战书，正自动连线中...`);
-                connectToPeerFromInput();
-            }
-        }
-
-        function generateAndSyncMatchPool() {
+        // 房东下达开赛指令
+        function hostInitiateGame() {
             if(wordList.length === 0) return;
-            let tempPool = [];
-            for(let i=0; i<wordList.length; i++) tempPool.push(i);
-            tempPool.sort(() => Math.random() - 0.5);
-            pkWordsPool = tempPool;
-            sendData({type: 'INIT_POOL', pool: tempPool});
+            // 房东随机生成 100 道题目的固定乱序序列索引
+            let indices = [];
+            for(let i=0; i<wordList.length; i++) indices.push(i);
+            indices.sort(() => Math.random() - 0.5);
+            matchQuestionIndices = indices;
+            currentRoundNumber = 0;
+
+            // 发送给客人
+            sendData({
+                type: 'HOST_START_GAME',
+                questionIndices: indices
+            });
+
+            triggerStartPkGameView();
+            hostGenerateNextRound(); // 房东发第一题
         }
 
-        // 进入限时 1分钟 对局
-        function triggerStartPkGame() {
+        // 强同步：由房东统一出题并分发结构
+        function hostGenerateNextRound() {
+            if(currentRoundNumber >= matchQuestionIndices.length) {
+                currentRoundNumber = 0; // 题干循环
+            }
+            const wordIdx = matchQuestionIndices[currentRoundNumber];
+            const correctWord = wordList[wordIdx];
+
+            // 生成干扰选项
+            let options = [correctWord.translation];
+            while(options.length < 4) {
+                const rand = wordList[Math.floor(Math.random() * wordList.length)].translation;
+                if(!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const roundData = {
+                eng: correctWord.word,
+                correct: correctWord.translation,
+                options: options
+            };
+
+            currentQuestionData = roundData;
+
+            // 广播给客人，确保看到一模一样的题
+            sendData({
+                type: 'NEXT_ROUND_DATA',
+                roundData: roundData,
+                roundNumber: currentRoundNumber
+            });
+
+            renderSyncQuestionUI();
+        }
+
+        function triggerStartPkGameView() {
             document.getElementById('pk-lobby').classList.add('hidden');
             document.getElementById('pk-summary').classList.add('hidden');
             document.getElementById('pk-arena').classList.remove('hidden');
@@ -444,13 +436,11 @@
             myPkScore = 0;
             oppPkScore = 0;
             currentPkCombo = 0;
-            pkTimeLeft = 60; // 60秒限时
+            pkTimeLeft = 60; // 严格全对战总限时 60s
 
             document.getElementById('arena-my-score').innerText = 0;
             document.getElementById('arena-opp-score').innerText = 0;
             document.getElementById('combo-tracker').innerText = "Combo: 0";
-            
-            renderNextPkQuestion();
 
             if(pkTimer) clearInterval(pkTimer);
             const progressBar = document.getElementById('pk-progress');
@@ -463,74 +453,111 @@
 
                 if(pkTimeLeft <= 0) {
                     clearInterval(pkTimer);
-                    sendData({type: 'GAME_OVER_SYNC', score: myPkScore});
-                    handleMatchEnded();
+                    if(isHost) {
+                        sendData({type: 'FORCE_END_GAME'});
+                        handleMatchEnded();
+                    }
                 }
             }, 1000);
         }
 
-        function renderNextPkQuestion() {
-            if(wordList.length === 0) return;
-            if(pkWordsPool.length === 0) {
-                for(let i=0; i<wordList.length; i++) pkWordsPool.push(i);
-                pkWordsPool.sort(() => Math.random() - 0.5);
-            }
-            const currentWordIdx = pkWordsPool.pop();
-            const correctWord = wordList[currentWordIdx];
+        // 渲染强同步题目界面
+        function renderSyncQuestionUI() {
+            IHaveAnswered = false;
+            oppHasAnswered = false;
+            myChoiceGainedPoints = 0;
 
-            let options = [correctWord.translation];
-            while(options.length < 4) {
-                const rand = wordList[Math.floor(Math.random() * wordList.length)].translation;
-                if(!options.includes(rand)) options.push(rand);
-            }
-            options.sort(() => Math.random() - 0.5);
+            document.getElementById('arena-waiting-overlay').classList.add('hidden');
+            document.getElementById('sync-q-index').innerText = `第 ${currentRoundNumber + 1} 题`;
+            document.getElementById('pk-question').innerText = currentQuestionData.eng;
 
-            currentPkQuestion = { eng: correctWord.word, correct: correctWord.translation };
-            document.getElementById('pk-question').innerText = currentPkQuestion.eng;
+            // 重置双方作答状态标签
+            document.getElementById('my-status-tag').innerText = "思考中 ✏️";
+            document.getElementById('my-status-tag').className = "text-xs text-sketch-ink/50 mt-1 font-bold";
+            document.getElementById('opp-status-tag').innerText = "思考中 ✏️";
+            document.getElementById('opp-status-tag').className = "text-xs text-sketch-ink/50 mt-1 font-bold animate-none";
 
             const optsDiv = document.getElementById('pk-options');
             optsDiv.innerHTML = '';
 
-            options.forEach(opt => {
+            currentQuestionData.options.forEach(opt => {
                 const btn = document.createElement('button');
-                // 选项大字号
                 btn.className = "w-full text-left p-4 bg-sketch-paper hand-border-sm hand-shadow-sm text-xl font-hand font-bold smooth-transition hover:bg-sketch-bg flex justify-between items-center group";
                 btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-pencil text-sketch-ink/20 group-hover:text-sketch-accent transition-colors"></i>`;
-                btn.onclick = () => checkPkAnswer(btn, opt);
+                btn.onclick = () => submitMySyncAnswer(btn, opt);
                 optsDiv.appendChild(btn);
             });
         }
 
-        function checkPkAnswer(btn, chosen) {
+        // 我本地作答
+        function submitMySyncAnswer(btnElement, chosenText) {
+            IHaveAnswered = true;
+            
+            // 锁定本地所有选项按钮
             const allBtns = document.getElementById('pk-options').querySelectorAll('button');
             allBtns.forEach(b => b.disabled = true);
 
-            const isRight = (chosen === currentPkQuestion.correct);
-            if(isRight) {
+            myChoiceCorrect = (chosenText === currentQuestionData.correct);
+            if(myChoiceCorrect) {
                 currentPkCombo++;
-                let gain = 10 + (currentPkCombo >= 3 ? Math.min(currentPkCombo * 2, 20) : 0);
-                myPkScore += gain;
-                document.getElementById('arena-my-score').innerText = myPkScore;
+                myChoiceGainedPoints = 10 + (currentPkCombo >= 3 ? Math.min(currentPkCombo * 2, 20) : 0);
+                myPkScore += myChoiceGainedPoints;
                 document.getElementById('combo-tracker').innerText = `Combo: 🔥 ${currentPkCombo}`;
-                
-                btn.classList.add('bg-sketch-sage/20', 'text-sketch-sage');
-                btn.style.borderColor = '#2A9D8F';
-                
-                sendData({type: 'OPP_SCORE_UPDATE', score: myPkScore});
-                setTimeout(renderNextPkQuestion, 300);
+                btnElement.classList.add('bg-sketch-sage/10', 'text-sketch-sage');
+                btnElement.style.borderColor = '#2A9D8F';
             } else {
                 currentPkCombo = 0;
+                myChoiceGainedPoints = 0;
                 document.getElementById('combo-tracker').innerText = "Combo: 0";
-                btn.classList.add('bg-sketch-accent/20', 'text-sketch-accent');
-                btn.style.borderColor = '#E76F51';
+                btnElement.classList.add('bg-sketch-accent/10', 'text-sketch-accent');
+                btnElement.style.borderColor = '#E76F51';
+            }
 
+            document.getElementById('my-status-tag').innerText = "✍️ 已作答！";
+            document.getElementById('my-status-tag').className = "text-xs text-sketch-sage mt-1 font-bold";
+            document.getElementById('arena-waiting-overlay').classList.remove('hidden');
+
+            // 核心通知：实时推送“已作答”信令给对方屏幕
+            sendData({ type: 'OPP_SUBMITTED' });
+
+            // 校验回合决议
+            checkRoundResolution();
+        }
+
+        // 回合决议判定：判定是否两个人都选完了
+        function checkRoundResolution() {
+            if(IHaveAnswered && oppHasAnswered) {
+                // 两边都选完了！立刻隐藏等待遮罩
+                document.getElementById('arena-waiting-overlay').classList.add('hidden');
+                
+                // 强制高亮标出正确答案
+                const allBtns = document.getElementById('pk-options').querySelectorAll('button');
                 allBtns.forEach(b => {
-                    if(b.querySelector('span').innerText === currentPkQuestion.correct) {
-                        b.classList.add('bg-sketch-sage/10');
+                    if(b.querySelector('span').innerText === currentQuestionData.correct) {
+                        b.classList.add('bg-sketch-sage/20');
                         b.style.borderColor = '#2A9D8F';
+                        b.querySelector('i').className = "fa-solid fa-circle-check text-sketch-sage text-lg";
                     }
                 });
-                setTimeout(renderNextPkQuestion, 800);
+
+                // 同步刷新我的分数看板
+                document.getElementById('arena-my-score').innerText = myPkScore;
+
+                // 核心同步：把我的最新总分，发送给伴侣同步更新
+                sendData({
+                    type: 'ROUND_SCORE_SYNC',
+                    oppTotalScore: myPkScore
+                });
+
+                // 停留 1.5 秒给情侣双方观察对错与实时分数的跳动变化，随后切题
+                setTimeout(() => {
+                    if(pkTimeLeft > 0) {
+                        if(isHost) {
+                            currentRoundNumber++;
+                            hostGenerateNextRound(); // 房东发下一题
+                        }
+                    }
+                }, 1500);
             }
         }
 
@@ -544,11 +571,11 @@
 
             let winText = "";
             if(myPkScore > oppPkScore) {
-                winText = "🏆 战神降临！你在本次极限倒计时中胜出！";
+                winText = "🏆 战神降临！本次强同步比拼中你技高一筹！";
             } else if (myPkScore < oppPkScore) {
-                winText = "🍫 惜败！伴侣今天手速超群，快去给Ta准备一个小零食奖励吧！";
+                winText = "🍫 惜败！伴侣今天手速和准确率封神，快去微信发个红包赞美Ta吧！";
             } else {
-                winText = "💖 惊人的平局！这不可思议的默契，必须合影留念！";
+                winText = "💖 天意啊！最终得分竟然完全相同！异地恋的默契天花板诞生。";
             }
             document.getElementById('summary-text').innerText = winText;
         }
@@ -557,12 +584,43 @@
             document.getElementById('pk-summary').classList.add('hidden');
             document.getElementById('pk-arena').classList.add('hidden');
             document.getElementById('pk-lobby').classList.remove('hidden');
-            if(isHost) {
-                generateAndSyncMatchPool();
+        }
+
+        // 发起邀请链接生成
+        function generateLiveInvite() {
+            if(!myRegisteredName) return;
+            const inviteUrl = `${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(myRegisteredName)}`;
+            navigator.clipboard.writeText(inviteUrl).then(() => {
+                showToast("📋 专属强同步联机网址已复制！快发给异地伴侣点击！");
+            }).catch(() => {
+                prompt("请手动复制下方网址发给伴侣：", inviteUrl);
+            });
+        }
+
+        function connectToPeerFromInput() {
+            const target = document.getElementById('peer-id-input').value.trim();
+            if(!target) { showToast("请输入对方当前的名字！"); return; }
+            if(target === myRegisteredName) { showToast("不能挑战自己哦！"); return; }
+            
+            const fullTargetId = "love-vocab-2026-" + target;
+            document.getElementById('connection-status').innerText = `🚀 正在全网搜寻并连接呼叫 【${target}】...`;
+            
+            p2pConnection = peer.connect(fullTargetId);
+            isHost = false;
+            setupConnectionListeners();
+        }
+
+        function checkUrlInvitation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const invitePlayer = urlParams.get('invite');
+            if(invitePlayer && invitePlayer !== myRegisteredName) {
+                document.getElementById('peer-id-input').value = invitePlayer;
+                showToast(`🔔 侦测到来自 【${invitePlayer}】 的同屏挑战书，自动建立连线中...`);
+                connectToPeerFromInput();
             }
         }
 
-        // 单词浏览卡片控制
+        // 自由背单词常规逻辑
         function switchTab(target) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`sec-${target}`).classList.remove('hidden');

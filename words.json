@@ -1,212 +1,709 @@
 [
   {
-    "word": "Accelerate",
-    "phonetic": "/əkˈseləreɪt/",
-    "translation": "加速，促进",
-    "example": "Exposure to a language environment can accelerate vocabulary acquisition.",
-    "exChn": "置身于语言环境中能够加速词汇的习得。"
+    "word": "Abolish",
+    "phonetic": "/əˈbɒlɪʃ/",
+    "translation": "废除，消灭",
+    "example": "Some people believe that traditional exams should be abolished entirely.",
+    "exChn": "有些人认为应当完全废除传统考试。"
   },
   {
-    "word": "Accumulate",
-    "phonetic": "/əˈkjuːmjəleɪt/",
-    "translation": "积累，积聚",
-    "example": "By studying daily, you will accumulate a vast amount of knowledge over time.",
-    "exChn": "通过每日的学习，久而久之你将会积累大量的知识。"
+    "word": "Abstract",
+    "phonetic": "/ˈæbstrækt/",
+    "translation": "抽象的；摘要",
+    "example": "The professor asked us to write a brief abstract of our research paper.",
+    "exChn": "教授要求我们为研究论文写一篇简短的摘要。"
   },
   {
-    "word": "Acquire",
-    "phonetic": "/əˈkwaɪə(r)/",
-    "translation": "获得，学到",
-    "example": "She managed to acquire a fluent accent after living abroad.",
-    "exChn": "在国外生活后，她成功练就了流利的口音。"
+    "word": "Academic",
+    "phonetic": "/ˌækəˈdemɪk/",
+    "translation": "学术的；学者",
+    "example": "The university provides excellent academic support for international students.",
+    "exChn": "这所大学为国际学生提供卓越的学术支持。"
   },
   {
-    "word": "Adequate",
-    "phonetic": "/ˈædɪkwət/",
-    "translation": "充足的，适当的",
-    "example": "Make sure you have adequate preparation before taking the IELTS exam.",
-    "exChn": "确保你在参加雅思考试前做了充足的准备。"
+    "word": "Access",
+    "phonetic": "/ˈækses/",
+    "translation": "通道，获取权；使用",
+    "example": "Every student should have equal access to educational resources.",
+    "exChn": "每个学生都应当享有平等的教育资源获取权。"
   },
   {
-    "word": "Alternative",
-    "phonetic": "/ɔːlˈtɜːnətɪv/",
-    "translation": "可供选择的，替代方案",
-    "example": "We need to find an alternative method to solve this complex problem.",
-    "exChn": "我们需要寻找一种替代方案来解决这个复杂的问题。"
+    "word": "Accommodate",
+    "phonetic": "/əˈkɒmədeɪt/",
+    "translation": "容纳，向…提供住宿，适应",
+    "example": "The new campus dormitory can accommodate over two thousand students.",
+    "exChn": "新校园宿舍可以容纳两千多名学生。"
   },
   {
-    "word": "Amplify",
-    "phonetic": "/ˈæmplɪfaɪ/",
-    "translation": "放大，增强",
-    "example": "The remote teamwork set-up can amplify the importance of clear communication.",
-    "exChn": "远程团队协作的模式会放大清晰沟通的重要性。"
+    "word": "Accompany",
+    "phonetic": "/əˈkʌmpəni/",
+    "translation": "陪伴，伴随",
+    "example": "Economic growth is often accompanied by an increase in urban population.",
+    "exChn": "经济增长往往伴随着城市人口的增加。"
   },
   {
-    "word": "Attribute",
-    "phonetic": "/əˈtrɪbjuːt/",
-    "translation": "归因于；特质",
-    "example": "He attributes his high score to consistent practice and perseverance.",
-    "exChn": "他将自己的高分归功于坚持不懈的练习与毅力。"
+    "word": "Accomplish",
+    "phonetic": "/əˈkʌmplɪʃ/",
+    "translation": "完成，实现",
+    "example": "We can accomplish great things if we collaborate effectively.",
+    "exChn": "如果我们有效协作，就能取得伟大的成就。"
   },
   {
-    "word": "Chronological",
-    "phonetic": "/ˌkrɒnəˈlɒdʒɪkl/",
-    "translation": "按时间顺序的",
-    "example": "The history professor arranged the historical events in chronological order.",
-    "exChn": "历史学教授按照时间顺序排列了这些历史事件。"
+    "word": "Accurate",
+    "phonetic": "/ˈækjərət/",
+    "translation": "精确的，准确的",
+    "example": "It is crucial to provide accurate data inscientific reports.",
+    "exChn": "在科学报告中提供精确的数据至关重要。"
   },
   {
-    "word": "Compensate",
-    "phonetic": "/ˈkɒmpenseɪt/",
-    "translation": "补偿，弥补",
-    "example": "Her strong reading skills can compensate for her weakness in speaking.",
-    "exChn": "她强大的阅读能力可以弥补她在口语上的弱点。"
+    "word": "Acknowledge",
+    "phonetic": "/əkˈnɒlɪdʒ/",
+    "translation": "承认，感谢",
+    "example": "The government refused to acknowledge the severity of the crisis.",
+    "exChn": "政府拒绝承认这场危机的严重性。"
   },
   {
-    "word": "Component",
-    "phonetic": "/kəmˈpəʊnənt/",
-    "translation": "成分，组成部分",
-    "example": "Listening is a crucial component of any language learning system.",
-    "exChn": "听力是任何语言学习体系中至关重要的组成部分。"
+    "word": "Adapt",
+    "phonetic": "/əˈdæpt/",
+    "translation": "适应，改装，改编",
+    "example": "Living abroad forces people to adapt to new cultural norms.",
+    "exChn": "海外生活迫使人们去适应新的文化规范。"
   },
   {
-    "word": "Conceal",
-    "phonetic": "/kənˈsiːl/",
-    "translation": "隐藏，隐瞒",
-    "example": "It is difficult for him to conceal his excitement about seeing her.",
-    "exChn": "他很难掩饰要见到她的兴奋之情。"
+    "word": "Adhere",
+    "phonetic": "/ədˈhɪə(r)/",
+    "translation": "坚持，粘附，遵守",
+    "example": "All laboratory staff must strictly adhere to the safety guidelines.",
+    "exChn": "所有实验室工作人员必须严格遵守安全指南。"
   },
   {
-    "word": "Conclusive",
-    "phonetic": "/kənˈkluːsɪv/",
-    "translation": "确凿的，结论性的",
-    "example": "The researchers gathered conclusive evidence to support their hypothesis.",
-    "exChn": "研究人员收集了确凿的证据来支持他们的假设。"
+    "word": "Adjacent",
+    "phonetic": "/əˈdʒeɪsnt/",
+    "translation": "邻近的，毗连的",
+    "example": "The new library was built adjacent to the student center.",
+    "exChn": "新图书馆建在学生中心附近。"
   },
   {
-    "word": "Contradict",
-    "phonetic": "/ˌkɒntrəˈdɪkt/",
-    "translation": "反驳，与…矛盾",
-    "example": "The new findings contradict the theories established ten years ago.",
-    "exChn": "这些新发现与十年前建立的理论相矛盾。"
+    "word": "Adjust",
+    "phonetic": "/əˈdʒʌst/",
+    "translation": "调整，使适应",
+    "example": "It took her several months to adjust to the cold winter climate.",
+    "exChn": "她花了好几个月才适应寒冷的冬季气候。"
   },
   {
-    "word": "Crucial",
-    "phonetic": "/ˈkruːʃl/",
-    "translation": "至关重要的，关键的",
-    "example": "Mutual trust plays a crucial role in maintaining a long-distance relationship.",
-    "exChn": "相互信任在维持异地恋关系中起着至关重要的作用。"
+    "word": "Administer",
+    "phonetic": "/ədˈmɪnɪstə(r)/",
+    "translation": "管理，执行，实施",
+    "example": "The school uses a specialized system to administer final examinations.",
+    "exChn": "学校使用专门的系统来管理期末考试。"
   },
   {
-    "word": "Decline",
-    "phonetic": "/dɪˈklaɪn/",
-    "translation": "下降，衰退，拒绝",
-    "example": "The number of tourists began to decline during the winter season.",
-    "exChn": "游客数量在冬季开始下降。"
+    "word": "Adolescent",
+    "phonetic": "/ˌædəˈlesnt/",
+    "translation": "青少年；青春期的",
+    "example": "Adolescent psychological health has become a global concern.",
+    "exChn": "青少年的心理健康已成为全球关注的话题。"
   },
   {
-    "word": "Demonstrate",
-    "phonetic": "/ˈdemənstreɪt/",
-    "translation": "证明，论证，展示",
-    "example": "The experiment was designed to demonstrate the effects of gravity.",
-    "exChn": "该实验旨在展示重力的影响。"
+    "word": "Adopt",
+    "phonetic": "/əˈdɒpt/",
+    "translation": "采用，采纳，收养",
+    "example": "Many schools decide to adopt digital textbooks to save costs.",
+    "exChn": "许多学校决定采用数字化教科书以节省成本。"
   },
   {
-    "word": "Differentiate",
-    "phonetic": "/ˌdɪfəˈrenʃieɪt/",
-    "translation": "区分，区别",
-    "example": "It is important to differentiate between opinion and factual evidence.",
-    "exChn": "区分观点与事实证据是非常重要的。"
+    "word": "Adverse",
+    "phonetic": "/ˈædvɜːs/",
+    "translation": "不利的，有害的",
+    "example": "The medicine had some adverse effects on his sleep cycle.",
+    "exChn": "这种药物对他的睡眠周期产生了一些不良影响。"
   },
   {
-    "word": "Diverse",
-    "phonetic": "/daɪˈvɜːs/",
-    "translation": "多元化的，不同的",
-    "example": "The university boasts a diverse student body from all over the world.",
-    "exChn": "这所大学拥有来自世界各地的多元化学生群体。"
+    "word": "Aesthetic",
+    "phonetic": "/iːsˈθetɪk/",
+    "translation": "美学的，审美的",
+    "example": "The building combines industrial functionality with aesthetic appeal.",
+    "exChn": "这座建筑将工业功能性与美学魅力结合在一起。"
   },
   {
-    "word": "Equivalent",
-    "phonetic": "/ɪˈkwɪvələnt/",
-    "translation": "相等的，等价物",
-    "example": "An IELTS score of 7.5 is roughly equivalent to a TOEFL score of 100.",
-    "exChn": "雅思7.5分大致相当于托福100分。"
+    "word": "Affect",
+    "phonetic": "/əˈfekt/",
+    "translation": "影响，感动",
+    "example": "Climate change will drastically affect global agricultural output.",
+    "exChn": "气候变化将剧烈影响全球农业产量。"
   },
   {
-    "word": "Evaluate",
-    "phonetic": "/ɪˈvæljueɪt/",
-    "translation": "评估，评价",
-    "example": "Teachers use various methods to evaluate their students' progress.",
-    "exChn": "教师们使用各种方法来评估学生的进步。"
+    "word": "Affiliate",
+    "phonetic": "/əˈfɪlieɪt/",
+    "translation": "使附属；附属机构",
+    "example": "The local college is affiliated with a prestigious national university.",
+    "exChn": "这所地方学院隶属于一所著名的国立大学。"
   },
   {
-    "word": "Exaggerate",
-    "phonetic": "/ɪɡˈzædʒəreɪt/",
-    "translation": "夸大，夸张",
-    "example": "Don't exaggerate the difficulties; we can overcome them together.",
-    "exChn": "不要夸大困难，我们可以一起战胜它们。"
+    "word": "Aggregate",
+    "phonetic": "/ˈæɡrɪɡət/",
+    "translation": "总数，总计；聚集",
+    "example": "The aggregate demand for renewable energy has reached an all-time high.",
+    "exChn": "对可再生能源的总需求达到了历史新高。"
   },
   {
-    "word": "Feasible",
-    "phonetic": "/ˈfiːzəbl/",
-    "translation": "可行的，行得通的",
-    "example": "It is a feasible plan to study two hours of English every day.",
-    "exChn": "每天学习两小时英语是一个可行的计划。"
+    "word": "Alleviate",
+    "phonetic": "/əˈliːvieɪt/",
+    "translation": "减轻，缓解",
+    "example": "New public transport options will help alleviate traffic congestion.",
+    "exChn": "新的公共交通选择将有助于缓解交通拥堵。"
   },
   {
-    "word": "Guarantee",
-    "phonetic": "/ˌɡærənˈtiː/",
-    "translation": "保证，担保",
-    "example": "High attendance alone does not guarantee a passing grade.",
-    "exChn": "单凭高出勤率并不能保证及格。"
+    "word": "Allocate",
+    "phonetic": "/ˈæləkeɪt/",
+    "translation": "分配，拨给",
+    "example": "The committee voted to allocate more funds to scientific research.",
+    "exChn": "委员会投票决定为科学研究分配更多资金。"
   },
   {
-    "word": "Implication",
-    "phonetic": "/ˌɪmplɪˈkeɪʃn/",
-    "translation": "暗示，可能的影响",
-    "example": "The decision could have serious implications for the local economy.",
-    "exChn": "这一决定可能会对当地经济产生严重影响。"
+    "word": "Alter",
+    "phonetic": "/ˈɔːltə(r)/",
+    "translation": "改变，更改",
+    "example": "The rise of online learning has permanently altered the education landscape.",
+    "exChn": "在线学习的兴起永久性地改变了教育格局。"
   },
   {
-    "word": "Incentive",
-    "phonetic": "/ɪnˈsentɪv/",
-    "translation": "激励，刺激",
-    "example": "The scholarship provided a strong incentive for students to work harder.",
-    "exChn": "奖学金为学生们刻苦学习提供了强大的动力。"
+    "word": "Ambition",
+    "phonetic": "/æmˈbɪʃn/",
+    "translation": "雄心，抱负",
+    "example": "Her ambition is to become a leading expert in artificial intelligence.",
+    "exChn": "她的抱负是成为人工智能领域的顶尖专家。"
   },
   {
-    "word": "Inevitably",
-    "phonetic": "/ɪnˈevɪtəbli/",
-    "translation": "不可避免地",
-    "example": "Technological advancements will inevitably change the way we live.",
-    "exChn": "技术进步不可避免地会改变我们的生活方式。"
+    "word": "Amend",
+    "phonetic": "/əˈmend/",
+    "translation": "修改，修正",
+    "example": "The committee decided to amend the law to protect consumer rights.",
+    "exChn": "委员会决定修改法律以保护消费者权益。"
   },
   {
-    "word": "Magnificent",
-    "phonetic": "/mæɡˈnɪfɪsnt/",
-    "translation": "壮丽的，宏伟的",
-    "example": "They stood on the mountain top, enjoying the magnificent view.",
-    "exChn": "他们站在山顶，欣赏着壮丽的景色。"
+    "word": "Analogy",
+    "phonetic": "/əˈnælədʒi/",
+    "translation": "类比，类推",
+    "example": "The teacher used an analogy comparing the human brain to a computer.",
+    "exChn": "老师用了一个类比，把人类的大脑比作电脑。"
   },
   {
-    "word": "Objective",
-    "phonetic": "/əbˈdʒektɪv/",
-    "translation": "客观的；目标",
-    "example": "Scientists must remain objective when analyzing experimental data.",
-    "exChn": "科学家在分析实验数据时必须保持客观。"
+    "word": "Analyze",
+    "phonetic": "/ˈænəlaɪz/",
+    "translation": "分析",
+    "example": "We need to analyze the experiment results thoroughly before publishing.",
+    "exChn": "在发表之前，我们需要彻底分析实验结果。"
   },
   {
-    "word": "Simultaneous",
-    "phonetic": "/ˌsɪmlˈteɪniəs/",
-    "translation": "同时发生的",
-    "example": "The game features simultaneous updates for players across the world.",
-    "exChn": "这款游戏为世界各地的玩家提供同步的实时更新。"
+    "word": "Annual",
+    "phonetic": "/ˈænjuəl/",
+    "translation": "每年的，年度的",
+    "example": "The company hosts an annual conference to discuss future strategies.",
+    "exChn": "公司每年举办一次会议来讨论未来的战略。"
   },
   {
-    "word": "Vague",
-    "phonetic": "/veɪɡ/",
-    "translation": "模糊的，不明确的",
-    "example": "The instructions were too vague, leaving the students confused.",
-    "exChn": "这些指令太模糊了，让学生们感到很困惑。"
+    "word": "Anticipate",
+    "phonetic": "/ænˈtɪsɪpeɪt/",
+    "translation": "预期，预料",
+    "example": "Economists anticipate a steady recovery in the retail sector.",
+    "exChn": "经济学家预计零售业将稳步复苏。"
+  },
+  {
+    "word": "Apparent",
+    "phonetic": "/əˈpærənt/",
+    "translation": "明显的，显而易见的",
+    "example": "It became apparent that the initial hypothesis was incorrect.",
+    "exChn": "很明显，最初的假设是不正确的。"
+  },
+  {
+    "word": "Append",
+    "phonetic": "/əˈpend/",
+    "translation": "附加，添加",
+    "example": "You can append extra notes at the end of the document if necessary.",
+    "exChn": "如果有必要，你可以在文件末尾附加额外的注释。"
+  },
+  {
+    "word": "Appreciate",
+    "phonetic": "/əˈpriːʃieɪt/",
+    "translation": "感激，欣赏，增值",
+    "example": "Studying history helps us appreciate different cultural perspectives.",
+    "exChn": "学习历史有助于我们欣赏不同的文化视角。"
+  },
+  {
+    "word": "Approach",
+    "phonetic": "/əˈprəʊtʃ/",
+    "translation": "方法，途径；接近",
+    "example": "A multi-disciplinary approach is required to tackle climate change.",
+    "exChn": "应对气候变化需要多学科协同的方法。"
+  },
+  {
+    "word": "Appropriate",
+    "phonetic": "/əˈprəʊpriət/",
+    "translation": "适当的，恰当的",
+    "example": "Please dress in a manner appropriate for a formal interview.",
+    "exChn": "请穿着适合正式面试的服装。"
+  },
+  {
+    "word": "Approximate",
+    "phonetic": "/əˈprɒksɪmət/",
+    "translation": "近似的，大概的",
+    "example": "The approximate flight time from London to New York is seven hours.",
+    "exChn": "伦敦到纽约的大致飞行时间是七小时。"
+  },
+  {
+    "word": "Arbitrary",
+    "phonetic": "/ˈɑːbɪtrəri/",
+    "translation": "武断的，随意的",
+    "example": "The decision seemed arbitrary and lacked logical justification.",
+    "exChn": "这个决定显得很武断，缺乏逻辑依据。"
+  },
+  {
+    "word": "Aspect",
+    "phonetic": "/ˈæspekt/",
+    "translation": "方面，方向，外观",
+    "example": "Language proficiency affects every aspect of a student's academic life.",
+    "exChn": "语言熟练度会影响学生学术生活的方方面面。"
+  },
+  {
+    "word": "Assemble",
+    "phonetic": "/əˈsembl/",
+    "translation": "聚集，组装",
+    "example": "A large crowd began to assemble outside the parliament building.",
+    "exChn": "大批人群开始在议会大楼外聚集。"
+  },
+  {
+    "word": "Assess",
+    "phonetic": "/əˈses/",
+    "translation": "评估，评定",
+    "example": "The final exam is designed to assess your understanding of the course.",
+    "exChn": "期末考试旨在评估你对这门课程的理解。"
+  },
+  {
+    "word": "Assign",
+    "phonetic": "/əˈsaɪn/",
+    "translation": "分配，指派",
+    "example": "The teacher will assign a new presentation topic next week.",
+    "exChn": "老师下周将分配一个新的演说主题。"
+  },
+  {
+    "word": "Assist",
+    "phonetic": "/əˈsɪst/",
+    "translation": "协助，帮助",
+    "example": "Advanced translation tools can assist students in reading complex papers.",
+    "exChn": "先进的翻译工具可以协助学生阅读复杂的论文。"
+  },
+  {
+    "word": "Assume",
+    "phonetic": "/əˈsjuːm/",
+    "translation": "假设，承担",
+    "example": "We should not assume that everyone has stable internet access.",
+    "exChn": "我们不应该假设每个人都有稳定的网络连接。"
+  },
+  {
+    "word": "Assure",
+    "phonetic": "/əˈʃʊə(r)/",
+    "translation": "向…保证，确保",
+    "example": "The coordinator assured us that the technology issue would be fixed.",
+    "exChn": "协调员向我们保证技术问题将会得到解决。"
+  },
+  {
+    "word": "Attach",
+    "phonetic": "/əˈtætʃ/",
+    "translation": "系上，附加，贴上",
+    "example": "Please remember to attach your resume to the application email.",
+    "exChn": "请记得在申请邮件中附上你的简历。"
+  },
+  {
+    "word": "Attain",
+    "phonetic": "/əˈteɪn/",
+    "translation": "达到，获得",
+    "example": "With dedication, you can attain a high level of language fluency.",
+    "exChn": "只要专注投入，你就能达到很高的语言流利度。"
+  },
+  {
+    "word": "Attitude",
+    "phonetic": "/ˈætɪtjuːd/",
+    "translation": "态度，看法",
+    "example": "A positive attitude towards mistakes is crucial for learners.",
+    "exChn": "对错误保持积极的态度对学习者来说至关重要。"
+  },
+  {
+    "word": "Authority",
+    "phonetic": "/ɔːˈθɒrəti/",
+    "translation": "权威，官方，权力",
+    "example": "She is a widely recognized authority on environmental law.",
+    "exChn": "她是公认的环境法权威。"
+  },
+  {
+    "word": "Automate",
+    "phonetic": "/ˈɔːtəmeɪt/",
+    "translation": "使自动化",
+    "example": "Factories use robots to automate repetitive assembly line tasks.",
+    "exChn": "工厂利用机器人使重复的装配线任务自动化。"
+  },
+  {
+    "word": "Available",
+    "phonetic": "/əˈveɪləbl/",
+    "translation": "可获得的，可用的，有空的",
+    "example": "Further information is available on the university's official website.",
+    "exChn": "更多信息可在大学官方网站上获得。"
+  },
+  {
+    "word": "Aware",
+    "phonetic": "/əˈweə(r)/",
+    "translation": "意识到的，知道的",
+    "example": "Most consumers are fully aware of the importance of recycling.",
+    "exChn": "大多数消费者都充分意识到了循环利用的重要性。"
+  },
+  {
+    "word": "Behalf",
+    "phonetic": "/bɪˈhɑːf/",
+    "translation": "代表，利益",
+    "example": "The lawyer spoke on behalf of the environmental organization.",
+    "exChn": "律师代表该环保组织发表了讲话。"
+  },
+  {
+    "word": "Benefit",
+    "phonetic": "/ˈbenɪfɪt/",
+    "translation": "利益，好处；受益",
+    "example": "Both partners benefit from clear and honest communication.",
+    "exChn": "双方都能从清晰坦诚的沟通中获益。"
+  },
+  {
+    "word": "Bias",
+    "phonetic": "/ˈbaɪəs/",
+    "translation": "偏见，偏向",
+    "example": "Researchers must eliminate personal bias when conducting interviews.",
+    "exChn": "研究人员在进行访谈时必须消除个人偏见。"
+  },
+  {
+    "word": "Bond",
+    "phonetic": "/bɒnd/",
+    "translation": "纽带，结合，债券",
+    "example": "Sharing challenges can strengthen the emotional bond between people.",
+    "exChn": "共同分担挑战可以增强人与人之间的情感纽带。"
+  },
+  {
+    "word": "Brief",
+    "phonetic": "/briːf/",
+    "translation": "简短的；摘要",
+    "example": "The manager gave a brief introduction before the presentation started.",
+    "exChn": "经理在演说开始前做了简短的介绍。"
+  },
+  {
+    "word": "Bulk",
+    "phonetic": "/bʌlk/",
+    "translation": "大部分，主体，大宗",
+    "example": "The bulk of the budget was spent on upgrading laboratory equipment.",
+    "exChn": "预算的大部分花在了升级实验室设备上。"
+  },
+  {
+    "word": "Capable",
+    "phonetic": "/ˈkeɪpəbl/",
+    "translation": "有能力的，有才干的",
+    "example": "She is fully capable of managing the entire research group.",
+    "exChn": "她完全有能力管理整个研究小组。"
+  },
+  {
+    "word": "Capacity",
+    "phonetic": "/kəˈpæsəti/",
+    "translation": "容量，能力，生产力",
+    "example": "The stadium has a seating capacity of fifty thousand people.",
+    "exChn": "该体育场拥有五万个座位容纳量。"
+  },
+  {
+    "word": "Category",
+    "phonetic": "/ˈkætəɡəri/",
+    "translation": "类别，范畴",
+    "example": "The library data sorts books into precise thematic categories.",
+    "exChn": "图书馆数据将书籍归入精确的主题类别中。"
+  },
+  {
+    "word": "Cease",
+    "phonetic": "/siːs/",
+    "translation": "停止，结束",
+    "example": "The factory was ordered to cease operations due to environmental pollution.",
+    "exChn": "该工厂因环境污染被令停止运营。"
+  },
+  {
+    "word": "Challenge",
+    "phonetic": "/ˈtʃælɪndʒ/",
+    "translation": "挑战，质疑",
+    "example": "Mastering academic vocabulary is a significant challenge for immigrants.",
+    "exChn": "掌握学术词汇对移民来说是一个巨大的挑战。"
+  },
+  {
+    "word": "Channel",
+    "phonetic": "/ˈtʃænl/",
+    "translation": "渠道，海峡，频道；引导",
+    "example": "The internet provides a direct channel for global knowledge exchange.",
+    "exChn": "互联网为全球知识交流提供了直接的渠道。"
+  },
+  {
+    "word": "Chapter",
+    "phonetic": "/ˈtʃæptə(r)/",
+    "translation": "章节，时期",
+    "example": "The third chapter of the textbook focuses entirely on economics.",
+    "exChn": "教科书的第三章完全聚焦于经济学。"
+  },
+  {
+    "word": "Chart",
+    "phonetic": "/tʃɑːt/",
+    "translation": "图表，航海图；绘制",
+    "example": "The pie chart illustrates the percentage of energy generated from wind.",
+    "exChn": "该饼图展示了风力发电的百分比。"
+  },
+  {
+    "word": "Chemical",
+    "phonetic": "/ˈkemɪkl/",
+    "translation": "化学的；化学制品",
+    "example": "The company was fined for dumping chemical waste into the river.",
+    "exChn": "该公司因向河中倾倒化学废物而被罚款。"
+  },
+  {
+    "word": "Circumstance",
+    "phonetic": "/ˈsɜːkəmstəns/",
+    "translation": "环境，情况，条件",
+    "example": "Under no circumstances should students share their exam passwords.",
+    "exChn": "在任何情况下，学生们都不应分享他们的考试密码。"
+  },
+  {
+    "word": "Cite",
+    "phonetic": "/saɪt/",
+    "translation": "引用，引证",
+    "example": "You must cite all academic sources accurately in your bibliography.",
+    "exChn": "你必须在参考文献中准确引用所有学术来源。"
+  },
+  {
+    "word": "Civil",
+    "phonetic": "/ˈsɪvl/",
+    "translation": "公民的，民事的，文职的",
+    "example": "The protest was a peaceful expression of deep civil dissatisfaction.",
+    "exChn": "这场抗议是公民深层不满情绪的和平表达。"
+  },
+  {
+    "word": "Clarify",
+    "phonetic": "/ˈklærɪfaɪ/",
+    "translation": "阐明，澄清",
+    "example": "Could you please clarify the entry requirements for this course?",
+    "exChn": "您能否澄清一下这门课程的入学要求？"
+  },
+  {
+    "word": "Classic",
+    "phonetic": "/ˈklæsɪk/",
+    "translation": "经典的，典型的；名著",
+    "example": "The essay provides a classic example of economic mismanagement.",
+    "exChn": "这篇文章提供了一个经济管理不善的典型例子。"
+  },
+  {
+    "word": "Clause",
+    "phonetic": "/klɔːz/",
+    "translation": "条款，从句",
+    "example": "The penalty clause in the contract protects both parties from delays.",
+    "exChn": "合同中的违约金条款保护双方免受延误影响。"
+  },
+  {
+    "word": "Code",
+    "phonetic": "/kəʊd/",
+    "translation": "代码，密码，道德准则",
+    "example": "The university strictly enforces a rigorous code of academic conduct.",
+    "exChn": "学校严格执行严厉的学术行为准则。"
+  },
+  {
+    "word": "Coherent",
+    "phonetic": "/kəʊˈhɪərənt/",
+    "translation": "连贯的，条理清晰的",
+    "example": "He managed to structure his argument into a coherent essay.",
+    "exChn": "他成功地将自己的论点组织成了一篇连贯的文章。"
+  },
+  {
+    "word": "Coincide",
+    "phonetic": "/ˌkəʊɪnˈsaɪd/",
+    "translation": "同时发生，相符，一致",
+    "example": "The publication of the book will coincide with the conference.",
+    "exChn": "该书的出版将与会议同时发生。"
+  },
+  {
+    "word": "Collapse",
+    "phonetic": "/kəˈlæps/",
+    "translation": "倒塌，崩溃，暴跌",
+    "example": "The ancient empire collapsed due to internal conflicts and inflation.",
+    "exChn": "古老帝国由于内部冲突和通货膨胀而崩溃。"
+  },
+  {
+    "word": "Colleague",
+    "phonetic": "/ˈkɒliːɡ/",
+    "translation": "同事，同僚",
+    "example": "She discussed the innovative hypothesis with a reliable colleague.",
+    "exChn": "她与一位可靠的同事讨论了这一创新假说。"
+  },
+  {
+    "word": "Commence",
+    "phonetic": "/kəˈmens/",
+    "translation": "开始，着手",
+    "example": "The construction of the library will commence early next spring.",
+    "exChn": "图书馆的建造将于明年早春开工。"
+  },
+  {
+    "word": "Comment",
+    "phonetic": "/ˈkɒment/",
+    "translation": "评论，意见",
+    "example": "The director refused to comment on the ongoing legal investigation.",
+    "exChn": "主管拒绝就正在进行的司法调查发表评论。"
+  },
+  {
+    "word": "Commission",
+    "phonetic": "/kəˈmɪʃn/",
+    "translation": "委员会，佣金；委任",
+    "example": "The city set up a commission to study sustainable housing issues.",
+    "exChn": "该市成立了一个委员会来研究可持续住房问题。"
+  },
+  {
+    "word": "Commit",
+    "phonetic": "/kəˈmɪt/",
+    "translation": "犯（错误），承诺，投入",
+    "example": "You must commit sufficient time if you wish to see massive progress.",
+    "exChn": "如果你希望看到巨大的进步，你必须投入足够的时间。"
+  },
+  {
+    "word": "Commodity",
+    "phonetic": "/kəˈmɒdəti/",
+    "translation": "商品，日用品",
+    "example": "Crude oil remains the most heavily traded commodity in the world.",
+    "exChn": "原油仍然是世界上贸易量最大的商品。"
+  },
+  {
+    "word": "Communicate",
+    "phonetic": "/kəˈmjuːnɪkeɪt/",
+    "translation": "沟通，交流，传达",
+    "example": "Technology allows long-distance couples to communicate instantly.",
+    "exChn": "科技允许异地恋情侣进行即时沟通。"
+  },
+  {
+    "word": "Community",
+    "phonetic": "/kəˈmjuːnəti/",
+    "translation": "社区，群体",
+    "example": "The online learning community provided immense support during exams.",
+    "exChn": "在线学习群体在考试期间提供了巨大的支持。"
+  },
+  {
+    "word": "Compatible",
+    "phonetic": "/kəmˈpætəbl/",
+    "translation": "兼容的，相容的，和睦相处的",
+    "example": "This upgraded software version is not compatible with older systems.",
+    "exChn": "此升级版软件与较旧的系统不兼容。"
+  },
+  {
+    "word": "Compile",
+    "phonetic": "/kəmˈpaɪl/",
+    "translation": "汇编，编辑",
+    "example": "The research assistant helped compile a massive database of text.",
+    "exChn": "研究助理帮助汇编了一个庞大的文本数据库。"
+  },
+  {
+    "word": "Complement",
+    "phonetic": "/ˈkɒmplɪment/",
+    "translation": "补充，相辅相成",
+    "example": "The hand-drawn background perfectly complements the clean typography.",
+    "exChn": "手绘背景完美地补充了整洁的排版。"
+  },
+  {
+    "word": "Complex",
+    "phonetic": "/ˈkɒmpleks/",
+    "translation": "复杂的；复合体",
+    "example": "The human brain is arguably the most complex organ in nature.",
+    "exChn": "人类大脑可以说是自然界中最复杂的器官。"
+  },
+  {
+    "word": "Compound",
+    "phonetic": "/ˈkɒmpaʊnd/",
+    "translation": "复合物；混合，加剧",
+    "example": "The economic hardships were compounded by a sudden drought.",
+    "exChn": "一场突如其来的干旱加剧了经济困境。"
+  },
+  {
+    "word": "Comprehensive",
+    "phonetic": "/ˌkɒmprɪˈhensɪv/",
+    "translation": "全面的，综合的",
+    "example": "The course offers a comprehensive introduction to modern sociology.",
+    "exChn": "这门课程全面介绍了现代社会学。"
+  },
+  {
+    "word": "Comprise",
+    "phonetic": "/kəmˈpraɪz/",
+    "translation": "包含，由…组成",
+    "example": "The final IELTS test score comprises four distinct module results.",
+    "exChn": "雅思最终测试分数由四个不同的单项结果组成。"
+  },
+  {
+    "word": "Compute",
+    "phonetic": "/kəmˈpjuːt/",
+    "translation": "计算，估算",
+    "example": "The supercomputer can compute complex algorithms within milliseconds.",
+    "exChn": "超级计算机可以在几毫秒内计算出复杂的算法。"
+  },
+  {
+    "word": "Conceive",
+    "phonetic": "/kənˈsiːv/",
+    "translation": "构想，设想，怀（胎）",
+    "example": "It is difficult to conceive of a world without digital connectivity.",
+    "exChn": "很难想象一个没有数字连接的网络世界。"
+  },
+  {
+    "word": "Concentrate",
+    "phonetic": "/ˈkɒnsntreɪt/",
+    "translation": "专心，集中",
+    "example": "Noise from the street made it impossible to concentrate on my reading.",
+    "exChn": "街道上的噪音让我根本无法集中注意力阅读。"
+  },
+  {
+    "word": "Concept",
+    "phonetic": "/ˈkɒnsept/",
+    "translation": "概念，观念",
+    "example": "The concept of sustainable development guides modern urban planning.",
+    "exChn": "可持续发展的概念指导着现代城市规划。"
+  },
+  {
+    "word": "Conclude",
+    "phonetic": "/kənˈkluːd/",
+    "translation": "得出结论，结束",
+    "example": "Based on the evidence, we can conclude that the policy failed.",
+    "exChn": "根据证据，我们可以得出该政策已经失败的结论。"
+  },
+  {
+    "word": "Concurrent",
+    "phonetic": "/kənˈkʌrənt/",
+    "translation": "并发的，同时发生的",
+    "example": "The user experienced concurrent dropouts across multiple devices.",
+    "exChn": "用户在多台设备上同时经历了断网故障。"
+  },
+  {
+    "word": "Conduct",
+    "phonetic": "/kənˈdʌkt/",
+    "translation": "实施，引导，品行",
+    "example": "The university will conduct a survey on student satisfaction.",
+    "exChn": "大学将对学生满意度进行一次全面调查。"
+  },
+  {
+    "word": "Confer",
+    "phonetic": "/kənˈfɜː(r)/",
+    "translation": "商讨，授予（称号、学位）",
+    "example": "The institution decided to confer an honorary degree upon the scientist.",
+    "exChn": "该机构决定授予这位科学家荣誉学位。"
+  },
+  {
+    "word": "Confine",
+    "phonetic": "/kənˈfaɪn/",
+    "translation": "限制，禁闭",
+    "example": "Please confine your discussion to the topic assigned by the teacher.",
+    "exChn": "请将你的讨论限制在老师指定的课题范围内。"
+  },
+  {
+    "word": "Confirm",
+    "phonetic": "/kənˈfɜːm/",
+    "translation": "证实，确认",
+    "example": "The laboratory tests confirmed the presence of the rare compound.",
+    "exChn": "实验室测试证实了这种罕见复合物的存在。"
   }
 ]

@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ 远距离的浪漫：单词能量站 & 双人PK舱</title>
+    <title>🎨 手绘风 · 雅思双人实时PK舱</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        hand: ['"Architects Daughter"', '"ZCOOL KuaiLe"', 'cursive'],
+                    },
                     colors: {
-                        morandi: {
-                            bg: '#FAF7F2',       /* 奶杏色底噪 */
-                            text: '#4E443C',     /* 深灰褐主文字 */
-                            muted: '#8C8275',    /* 莫兰迪中灰 */
-                            cardBorder: '#EBE5DA',/* 柔和边界线 */
-                            clay: '#C6A99A',     /* 复古暖陶土/玫瑰金 */
-                            clayHover: '#B59889',
-                            sage: '#A3B19B',     /* 舒缓鼠尾草绿 */
-                            sageHover: '#92A08A',
-                            rose: '#D4A3A3'      /* 浪漫淡玫瑰 */
+                        sketch: {
+                            bg: '#FDFBF7',       /* 复古手绘牛皮纸色 */
+                            ink: '#2B2A27',      /* 铅笔浓墨色 */
+                            paper: '#FFFFFF',    /* 纯白卡片 */
+                            accent: '#E76F51',   /* 温暖涂鸦红 */
+                            sage: '#2A9D8F',     /* 治愈手绘绿 */
+                            sky: '#4EA8DE'       /* 晴空手绘蓝 */
                         }
                     }
                 }
@@ -29,810 +31,600 @@
         }
     </script>
     <style>
-        /* 3D 卡片翻转核心样式 */
+        /* 强烈的粗糙线条手绘风格边框 */
+        .hand-border {
+            border: 3px solid #2B2A27;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-border-sm {
+            border: 2px solid #2B2A27;
+            border-radius: 12px 4px 12px 4px/4px 12px 4px 12px;
+        }
+        /* 拟真手绘阴影 */
+        .hand-shadow {
+            box-shadow: 5px 5px 0px 0px #2B2A27;
+        }
+        .hand-shadow-sm {
+            box-shadow: 3px 3px 0px 0px #2B2A27;
+        }
+        /* 交互微动效 */
+        .hand-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #2B2A27;
+        }
+        /* 3D 卡片翻转 */
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
-        
-        /* 隐藏滚动条但保留功能 */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* 丝滑过渡 */
-        .smooth-transition { transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
     </style>
 </head>
-<body class="bg-morandi-bg text-morandi-text font-sans min-h-screen flex flex-col antialiased selection:bg-morandi-clay/20">
+<body class="bg-sketch-bg text-sketch-ink font-sans min-h-screen flex flex-col p-4 md:p-8 antialiased selection:bg-sketch-accent/20 select-none">
 
-    <header class="w-full max-w-4xl mx-auto px-4 pt-6 md:pt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <header class="w-full max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
         <div class="flex items-center gap-3">
-            <div class="bg-white p-2.5 rounded-full shadow-sm border border-morandi-cardBorder">
-                <i class="fa-solid fa-heart-pulse text-morandi-rose text-xl animate-pulse"></i>
-            </div>
+            <div class="text-4xl text-sketch-accent"><i class="fa-solid fa-pencil"></i></div>
             <div>
-                <h1 class="text-lg font-medium tracking-wide">单词能量站 <span class="text-morandi-muted font-light">& PK舱</span></h1>
-                <p id="romantic-quote" class="text-xs text-morandi-muted mt-0.5 italic">"所爱隔山海，山海皆可平。"</p>
+                <h1 class="text-3xl md:text-4xl font-hand font-bold tracking-wider">雅思单词 · 实时PK舱</h1>
+                <p class="text-base font-hand text-sketch-ink/70">"实时连线，并肩作战 ✏️ 限时 60 秒极限挑战"</p>
             </div>
         </div>
-        
-        <div class="bg-white px-4 py-2 rounded-2xl shadow-sm border border-morandi-cardBorder flex items-center gap-3 text-xs">
-            <div class="flex items-center gap-1.5 border-r border-morandi-cardBorder pr-3">
-                <span class="text-morandi-muted">我:</span>
-                <input type="text" id="my-name-input" class="w-20 bg-transparent font-medium focus:outline-none text-morandi-clay focus:underline" value="麦麦" onchange="saveProfiles()">
-            </div>
-            <div class="flex items-center gap-1.5">
-                <span class="text-morandi-muted">伴侣:</span>
-                <input type="text" id="partner-name-input" class="w-20 bg-transparent font-medium focus:outline-none text-morandi-sage focus:underline" value="冬冬" onchange="saveProfiles()">
-            </div>
+        <div id="user-badge" class="hidden bg-sketch-paper px-5 py-2.5 hand-border-sm hand-shadow-sm text-base font-hand font-bold">
+            <i class="fa-solid fa-user text-sketch-sage mr-1"></i> 登录身份: <span id="display-my-name" class="text-sketch-accent">未解锁</span>
         </div>
     </header>
 
-    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-6 md:py-10 flex flex-col">
-        
-        <div class="flex justify-center mb-8 border-b border-morandi-cardBorder">
-            <nav class="flex gap-8 -mb-px" aria-label="Tabs">
-                <button onclick="switchTab('study')" id="tab-study" class="smooth-transition py-3 px-1 border-b-2 border-morandi-clay text-morandi-text font-medium text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-book-open"></i> 智能单词卡
-                </button>
-                <button onclick="switchTab('pk')" id="tab-pk" class="smooth-transition py-3 px-1 border-b-2 border-transparent text-morandi-muted hover:text-morandi-text font-medium text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> 异地竞技场
-                </button>
-                <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="smooth-transition py-3 px-1 border-b-2 border-transparent text-morandi-muted hover:text-morandi-text font-medium text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-trophy"></i> 荣誉里程碑
-                </button>
-            </nav>
-        </div>
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-sketch-ink text-white px-6 py-3 hand-border-sm hand-shadow text-base font-medium z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        提示内容
+    </div>
 
-        <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-morandi-text text-white px-5 py-2.5 rounded-full shadow-lg text-xs tracking-wide z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center gap-2">
-            <i class="fa-solid fa-info-circle text-morandi-clay"></i> <span id="toast-msg">提示内容</span>
-        </div>
+    <main class="flex-grow w-full max-w-4xl mx-auto flex flex-col">
 
-        <section id="sec-study" class="tab-content block space-y-6">
-            <div class="flex flex-col items-center justify-center py-4">
-                <div class="w-full max-w-md h-80 perspective-1000 cursor-pointer" onclick="flipCard()">
-                    <div id="flashcard" class="w-full h-full preserve-3d smooth-transition relative rounded-3xl shadow-md border border-morandi-cardBorder bg-white">
-                        
-                        <div class="absolute inset-0 backface-hidden flex flex-col justify-between p-8">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs text-morandi-muted tracking-wider font-light" id="card-index-front">01 / 30</span>
-                                <button onclick="speakWord(event)" class="text-morandi-muted hover:text-morandi-clay smooth-transition p-2 rounded-full hover:bg-morandi-bg" title="朗读发音">
-                                    <i class="fa-solid fa-volume-high text-base"></i>
-                                </button>
-                            </div>
-                            <div class="text-center my-auto">
-                                <h2 class="text-3xl md:text-4xl font-semibold tracking-wide text-morandi-text" id="word-eng">Serendipity</h2>
-                                <p class="text-sm text-morandi-muted mt-2 font-mono" id="word-phonetic">/ˌserənˈdɪpəti/</p>
-                            </div>
-                            <p class="text-center text-xs text-morandi-muted/60 tracking-widest flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-rotate"></i> 点击卡片翻面查看释义
-                            </p>
-                        </div>
+        <section id="sec-login" class="block max-w-md w-full mx-auto my-auto p-8 bg-sketch-paper hand-border hand-shadow space-y-6">
+            <div class="text-center space-y-2">
+                <div class="text-6xl text-sketch-sage font-hand"><i class="fa-solid fa-signature"></i></div>
+                <h2 class="text-2xl font-bold font-hand">起个独特的花名吧</h2>
+                <p class="text-sm text-sketch-ink/60">因为是线上实时连线，名字将作为你在星际太空中的唯一通信识别码（不可重复）。</p>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="username-input" placeholder="输入专属花名" class="w-full bg-sketch-bg p-4 hand-border-sm text-lg font-bold tracking-wide text-center focus:outline-none focus:border-sketch-accent transition-colors">
+                <button onclick="registerUser()" class="w-full hand-btn bg-sketch-sage hover:bg-sketch-sage text-white p-4 hand-border-sm hand-shadow-sm font-bold text-lg tracking-widest smooth-transition">
+                    锁定身份并进入 🚪
+                </button>
+            </div>
+        </section>
 
-                        <div class="absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between p-8 bg-gradient-to-br from-white to-stone-50/50 rounded-3xl">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs text-morandi-muted tracking-wider font-light" id="card-index-back">01 / 30</span>
-                                <span class="text-[10px] bg-morandi-clay/10 text-morandi-clay font-medium px-2 py-0.5 rounded-full">核心词汇</span>
-                            </div>
-                            <div class="my-auto space-y-4">
-                                <h3 class="text-xl font-medium text-center text-morandi-clay" id="word-chn">缘分；不期而遇的美好</h3>
-                                <div class="bg-morandi-bg/60 p-4 rounded-xl border border-morandi-cardBorder/40">
-                                    <p class="text-xs font-light text-morandi-muted leading-relaxed italic" id="word-ex-eng">"Our meeting in that bookstore was pure serendipity."</p>
-                                    <p class="text-xs mt-1 text-morandi-muted/80" id="word-ex-chn">我们在那家书店的相遇纯粹是机缘巧合。</p>
+        <div id="main-dashboard" class="hidden flex-grow flex flex-col">
+            <div class="flex justify-center gap-6 mb-8">
+                <button onclick="switchTab('study')" id="tab-study" class="hand-btn py-2.5 px-8 bg-sketch-paper hand-border-sm hand-shadow-sm text-lg font-bold font-hand flex items-center gap-2 smooth-transition">
+                    <i class="fa-solid fa-graduation-cap text-sketch-sky"></i> 单词自由背
+                </button>
+                <button onclick="switchTab('pk')" id="tab-pk" class="hand-btn py-2.5 px-8 bg-sketch-paper hand-border-sm hand-shadow-sm text-lg font-bold font-hand flex items-center gap-2 smooth-transition">
+                    <i class="fa-solid fa-gamepad text-sketch-accent"></i> 线上实时PK
+                </button>
+            </div>
+
+            <section id="sec-study" class="tab-content block space-y-6">
+                <div class="flex flex-col items-center justify-center py-4">
+                    <div class="w-full max-w-xl h-[26rem] perspective-1000 cursor-pointer" onclick="flipCard()">
+                        <div id="flashcard" class="w-full h-full preserve-3d smooth-transition relative bg-sketch-paper hand-border hand-shadow">
+                            <div class="absolute inset-0 backface-hidden flex flex-col justify-between p-8">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-base font-hand font-bold text-sketch-ink/60" id="study-index-1">000 / 0000</span>
+                                    <button onclick="speakWord(event)" class="text-sketch-ink/70 hover:text-sketch-accent p-2 text-2xl" title="朗读发音"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
+                                <div class="text-center my-auto">
+                                    <h2 class="text-5xl md:text-6xl font-bold font-hand tracking-wide text-sketch-ink" id="word-eng">Loading...</h2>
+                                    <p class="text-xl text-sketch-ink/60 mt-4 font-mono tracking-wide" id="word-phonetic">/ ... /</p>
+                                </div>
+                                <p class="text-center text-sm font-hand text-sketch-ink/40 tracking-wider">✏️ 点击卡片翻面看看释义</p>
                             </div>
-                            <p class="text-center text-xs text-morandi-muted/60 tracking-widest flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-rotate"></i> 点击卡片翻回正面
-                            </p>
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between p-8 bg-[#FBF9F3]">
+                                <span class="text-base font-hand font-bold text-sketch-ink/60" id="study-index-2">000 / 0000</span>
+                                <div class="my-auto space-y-6 text-center">
+                                    <h3 class="text-3xl md:text-4xl font-bold text-sketch-accent" id="word-chn">加载中...</h3>
+                                    <div class="p-5 border-2 border-dashed border-sketch-ink/30 rounded-2xl bg-white text-left">
+                                        <p class="text-lg font-hand leading-relaxed italic" id="word-ex-eng">"Please wait a second."</p>
+                                        <p class="text-base mt-2 text-sketch-ink/70" id="word-ex-chn">请稍等片刻。</p>
+                                    </div>
+                                </div>
+                                <p class="text-center text-sm font-hand text-sketch-ink/40 tracking-wider">✏️ 点击卡片翻回正面</p>
+                            </div>
                         </div>
+                    </div>
+                    <div class="flex items-center gap-10 mt-8">
+                        <button onclick="prevCard()" class="hand-btn w-16 h-16 bg-sketch-paper hand-border-sm hand-shadow-sm flex items-center justify-center text-2xl hover:bg-sketch-bg smooth-transition"><i class="fa-solid fa-arrow-left"></i></button>
+                        <span class="text-lg font-bold font-hand" id="study-progress">0 / 0</span>
+                        <button onclick="nextCard()" class="hand-btn w-16 h-16 bg-sketch-paper hand-border-sm hand-shadow-sm flex items-center justify-center text-2xl hover:bg-sketch-bg smooth-transition"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
 
+            <section id="sec-pk" class="tab-content hidden max-w-2xl mx-auto w-full">
+                <div id="pk-lobby" class="bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
+                    <div class="text-center space-y-2">
+                        <div class="text-6xl text-sketch-accent font-hand"><i class="fa-solid fa-wifi"></i></div>
+                        <h2 class="text-2xl md:text-3xl font-bold font-hand">P2P 实时联机竞技大厅</h2>
+                        <p class="text-base text-sketch-ink/70">利用高级 WebRTC 技术，无需后端中转。异地恋人跨越时空同屏大决战！</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="font-bold font-hand text-lg text-sketch-accent"><i class="fa-solid fa-paper-plane"></i> 方案 A: 呼叫伴侣</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">生成你的专属实时对战网址，微信或QQ发给对方即可一键连线。</p>
+                            </div>
+                            <button onclick="generateLiveInvite()" class="w-full hand-btn bg-sketch-accent text-white py-3 hand-border-sm hand-shadow-sm font-bold text-base tracking-wide">
+                                复制实时联机邀请
+                            </button>
+                        </div>
+                        <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="font-bold font-hand text-lg text-sketch-sage"><i class="fa-solid fa-headset"></i> 方案 B: 主动连线</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">如果伴侣已经在线，直接在下方输入Ta当前登录的花名，呼叫对局。</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="text" id="peer-id-input" placeholder="输入对方的名字" class="w-full bg-sketch-bg px-4 py-2 hand-border-sm text-sm font-bold focus:outline-none">
+                                <button onclick="connectToPeerFromInput()" class="hand-btn bg-sketch-sage text-white px-5 hand-border-sm hand-shadow-sm font-bold text-sm shrink-0">连线</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="connection-status" class="bg-sketch-bg p-4 hand-border-sm text-sm font-hand text-center text-sketch-ink/60">
+                        📡 当前云端通信雷达：正在等待连线指令...
                     </div>
                 </div>
 
-                <div class="flex items-center gap-6 mt-8">
-                    <button onclick="prevCard()" class="w-12 h-12 rounded-full border border-morandi-cardBorder bg-white flex items-center justify-center hover:bg-morandi-bg text-morandi-muted hover:text-morandi-text smooth-transition shadow-sm">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <span class="text-xs tracking-widest font-mono text-morandi-muted" id="study-progress-text">1 / 30</span>
-                    <button onclick="nextCard()" class="w-12 h-12 rounded-full border border-morandi-cardBorder bg-white flex items-center justify-center hover:bg-morandi-bg text-morandi-muted hover:text-morandi-text smooth-transition shadow-sm">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
+                <div id="pk-arena" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
+                    <div class="grid grid-cols-3 items-center text-center pb-4 border-b-2 border-sketch-ink/20 font-hand">
+                        <div>
+                            <p class="text-sm text-sketch-ink/50 font-bold uppercase">我 (<span id="arena-my-name">Me</span>)</p>
+                            <p id="arena-my-score" class="text-5xl font-bold text-sketch-sky font-mono mt-1">0</p>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="bg-sketch-accent text-white text-base px-3 py-1.5 hand-border-sm hand-shadow-sm font-bold tracking-widest animate-pulse" id="pk-timer-badge">60s</span>
+                            <p class="text-xs text-sketch-ink/40 mt-1" id="combo-tracker">Combo: 0</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-sketch-ink/50 font-bold uppercase">伴侣 (<span id="arena-opp-name">Opp</span>)</p>
+                            <p id="arena-opp-score" class="text-5xl font-bold text-sketch-accent font-mono mt-1">0</p>
+                        </div>
+                    </div>
 
-        <section id="sec-pk" class="tab-content hidden max-w-xl mx-auto w-full">
-            <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-40 w-full h-full"></canvas>
+                    <div class="w-full bg-sketch-bg h-3.5 hand-border-sm overflow-hidden">
+                        <div id="pk-progress" class="bg-sketch-accent h-full w-full transition-all duration-1000 linear"></div>
+                    </div>
 
-            <div id="pk-intro" class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-morandi-cardBorder space-y-6">
-                <div class="text-center space-y-2">
-                    <div class="w-14 h-14 bg-morandi-clay/10 text-morandi-clay rounded-full flex items-center justify-center mx-auto text-xl">
-                        <i class="fa-solid fa-stopwatch"></i>
+                    <div class="text-center py-4 space-y-2">
+                        <p class="text-xs font-hand text-sketch-ink/50 font-bold tracking-widest">请选择正确的中文翻译</p>
+                        <h3 id="pk-question" class="text-4xl font-bold font-hand text-sketch-ink">Meticulous</h3>
                     </div>
-                    <h2 class="text-xl font-medium tracking-wide">极简竞速舱</h2>
-                    <p class="text-xs text-morandi-muted">60秒倒计时，连续答对可激活甜蜜 Combo 连击加分！</p>
-                </div>
 
-                <div class="p-4 bg-morandi-bg/50 rounded-2xl border border-morandi-cardBorder/60 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-xs font-medium flex items-center gap-1.5"><i class="fa-solid fa-link text-morandi-sage"></i> 伴侣接力迎战</h3>
-                        <span class="text-[10px] text-morandi-muted">无后端离线同步</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <input type="text" id="challenge-code-input" placeholder="在此粘贴伴侣发给你的挑战码..." class="flex-grow bg-white text-xs px-3.5 py-2.5 rounded-xl border border-morandi-cardBorder focus:outline-none focus:border-morandi-clay transition-colors">
-                        <button onclick="importChallenge()" class="bg-morandi-sage hover:bg-morandi-sageHover text-white text-xs px-4 rounded-xl smooth-transition font-medium tracking-wide shadow-sm flex items-center gap-1">
-                            解析
-                        </button>
-                    </div>
-                    <div id="opponent-badge" class="hidden text-xs bg-morandi-rose/10 text-morandi-rose/90 p-2.5 rounded-xl border border-morandi-rose/20 flex items-center justify-between">
-                        <span><i class="fa-solid fa-swords"></i> 迎战状态：准备打破 <strong><span id="opp-name">伴侣</span></strong> 的 <strong><span id="opp-score">0</span>分</strong> 纪录！</span>
-                        <button onclick="cancelChallenge()" class="text-stone-400 hover:text-stone-600"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
+                    <div class="grid grid-cols-1 gap-4" id="pk-options">
+                        </div>
                 </div>
 
-                <button onclick="startPK()" class="w-full bg-morandi-clay hover:bg-morandi-clayHover text-white py-3.5 rounded-2xl font-medium tracking-widest text-sm shadow-sm smooth-transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-play text-xs"></i> 开启极限挑战
-                </button>
-            </div>
+                <div id="pk-summary" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow text-center space-y-6">
+                    <h2 class="text-4xl font-hand font-bold text-sketch-accent" id="summary-title">比赛结束！</h2>
+                    <p id="summary-text" class="text-lg font-hand text-sketch-ink/80 px-4">正在载入战报...</p>
 
-            <div id="pk-arena" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-morandi-cardBorder space-y-6 relative">
-                <div class="flex justify-between items-center text-xs">
-                    <div class="flex items-center gap-2">
-                        <span class="text-morandi-muted">得分:</span>
-                        <span id="pk-score" class="font-bold text-lg text-morandi-clay font-mono">0</span>
+                    <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto py-2">
+                        <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">我的得分</p>
+                            <p id="sum-my-score" class="text-4xl font-bold font-mono text-sketch-sky mt-1">0</p>
+                        </div>
+                        <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">对方得分</p>
+                            <p id="sum-opp-score" class="text-4xl font-bold font-mono text-sketch-accent mt-1">0</p>
+                        </div>
                     </div>
-                    <div id="combo-box" class="opacity-0 scale-75 transform smooth-transition bg-morandi-rose text-white font-mono px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider">
-                        COMBO ×<span id="pk-combo">0</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-regular fa-clock text-morandi-muted"></i>
-                        <span id="pk-timer" class="font-bold text-base font-mono">60s</span>
-                    </div>
-                </div>
 
-                <div class="w-full bg-morandi-bg h-1.5 rounded-full overflow-hidden">
-                    <div id="pk-progress-bar" class="bg-morandi-clay h-full w-full transition-all duration-1000 linear"></div>
-                </div>
-
-                <div class="text-center py-6 space-y-2">
-                    <p class="text-xs text-morandi-muted/60 tracking-widest font-light">请选出正确的中文释义</p>
-                    <h3 id="pk-question-word" class="text-3xl font-semibold tracking-wide text-morandi-text">Ephemeral</h3>
-                </div>
-
-                <div class="grid grid-cols-1 gap-3.5" id="pk-options-grid">
-                    </div>
-            </div>
-
-            <div id="pk-result" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-morandi-cardBorder text-center space-y-6">
-                <div class="space-y-2">
-                    <div class="w-14 h-14 bg-morandi-rose/10 text-morandi-rose rounded-full flex items-center justify-center mx-auto text-xl">
-                        <i class="fa-solid fa-flag-checkered"></i>
-                    </div>
-                    <h2 class="text-xl font-medium tracking-wide">挑战达成！</h2>
-                    <p id="pk-result-eval" class="text-xs text-morandi-muted px-4">完美配合！快去刷新战绩单吧。</p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto py-2">
-                    <div class="bg-morandi-bg/50 p-4 rounded-2xl border border-morandi-cardBorder/40">
-                        <p class="text-[10px] text-morandi-muted uppercase tracking-wider">最终得分</p>
-                        <p id="result-score" class="text-2xl font-bold font-mono text-morandi-clay mt-1">0</p>
-                    </div>
-                    <div class="bg-morandi-bg/50 p-4 rounded-2xl border border-morandi-cardBorder/40">
-                        <p class="text-[10px] text-morandi-muted uppercase tracking-wider">最高连击</p>
-                        <p id="result-maxcombo" class="text-2xl font-bold font-mono text-morandi-sage mt-1">0</p>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-morandi-bg/40 rounded-2xl border border-morandi-cardBorder/60 space-y-3 max-w-md mx-auto">
-                    <p class="text-xs text-morandi-muted leading-relaxed">
-                        点击下方按钮生成您的专属加密<strong>挑战码</strong>，发送给异地的伴侣。Ta粘贴后即可与你同台切磋胜负！
-                    </p>
-                    <button onclick="copyChallengeCode()" class="w-full bg-white hover:bg-morandi-bg text-morandi-text border border-morandi-cardBorder py-2.5 rounded-xl text-xs font-medium smooth-transition shadow-sm flex items-center justify-center gap-2">
-                        <i class="fa-regular fa-copy text-morandi-clay"></i> 生成并复制挑战密文
+                    <button onclick="quitToLobby()" class="hand-btn bg-sketch-ink text-white px-10 py-3.5 hand-border-sm hand-shadow-sm text-base font-bold tracking-wider">
+                        返回竞技大厅
                     </button>
                 </div>
-
-                <div class="flex gap-3 max-w-md mx-auto">
-                    <button onclick="resetPkView()" class="flex-1 bg-morandi-clay hover:bg-morandi-clayHover text-white py-2.5 rounded-xl text-xs font-medium smooth-transition shadow-sm">
-                        返回舱门
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec-leaderboard" class="tab-content hidden max-w-xl mx-auto w-full space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-morandi-cardBorder space-y-6">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-trophy text-morandi-clay"></i>
-                        <h2 class="text-base font-medium tracking-wide">谁是今日词汇王</h2>
-                    </div>
-                    <button onclick="clearLeaderboard()" class="text-xs text-morandi-muted hover:text-morandi-rose smooth-transition font-light">
-                        <i class="fa-regular fa-trash-can"></i> 清空纪录
-                    </button>
-                </div>
-
-                <div class="space-y-2 py-2">
-                    <div class="flex justify-between text-xs font-medium">
-                        <span class="text-morandi-clay" id="stat-my-label">我 (0胜)</span>
-                        <span class="text-morandi-muted text-[10px] font-normal">胜场对比</span>
-                        <span class="text-morandi-sage" id="stat-partner-label">(0胜) 伴侣</span>
-                    </div>
-                    <div class="w-full bg-stone-100 h-2.5 rounded-full flex overflow-hidden">
-                        <div id="bar-my-win" class="bg-morandi-clay h-full smooth-transition w-1/2"></div>
-                        <div id="bar-partner-win" class="bg-morandi-sage h-full smooth-transition w-1/2"></div>
-                    </div>
-                </div>
-
-                <div class="overflow-hidden rounded-2xl border border-morandi-cardBorder">
-                    <div class="max-h-64 overflow-y-auto no-scrollbar">
-                        <table class="w-full text-left border-collapse text-xs">
-                            <thead>
-                                <tr class="bg-morandi-bg/80 text-morandi-muted font-normal border-b border-morandi-cardBorder">
-                                    <th class="p-3.5 pl-5 font-medium">挑战勇士</th>
-                                    <th class="p-3.5 font-medium">PK得分</th>
-                                    <th class="p-3.5 font-medium">Max Combo</th>
-                                    <th class="p-3.5 pr-5 text-right font-medium">时间轴</th>
-                                </tr>
-                            </thead>
-                            <tbody id="leaderboard-tbody">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+            </section>
+        </div>
     </main>
 
-    <footer class="w-full text-center py-6 text-[11px] text-morandi-muted/60 tracking-wider font-light border-t border-morandi-cardBorder/40 mt-auto">
-        <span>Designed with <i class="fa-solid fa-heart text-morandi-rose/60 mx-0.5"></i> for Two Learners. 2026.</span>
+    <footer class="w-full text-center py-6 text-xs font-hand text-sketch-ink/40 tracking-wider mt-auto">
+        <span>🎨 Hand-drawn Romantic Studio © 2026.</span>
     </footer>
 
     <script>
-        // 30 个内置高阶美学词汇库
-        const wordList = [
-            { word: "Serendipity", phonetic: "/ˌserənˈdɪpəti/", translation: "缘分；不期而遇的美好", example: "Our meeting in that bookstore was pure serendipity.", exChn: "我们在那家书店的相遇纯粹是机缘巧合。" },
-            { word: "Ephemeral", phonetic: "/ɪˈfemərəl/", translation: "短暂的；转瞬即逝的", example: "Fame in the world of pop music is often ephemeral.", exChn: "流行乐坛的名声往往是转瞬即逝的。" },
-            { word: "Ethereal", phonetic: "/ɪˈθɪəriəl/", translation: "优雅的；超凡脱俗的", example: "The music had an ethereal quality that brought tears to my eyes.", exChn: "这音乐有一种超凡脱俗的质感，催人泪下。" },
-            { word: "Petrichor", phonetic: "/ˈpe.trɪ.kɔːr/", translation: "雨后泥土的清香", example: "I love the smell of petrichor after a hot summer afternoon rain.", exChn: "我喜欢炎热夏后初雨带来的泥土清香。" },
-            { word: "Halcyon", phonetic: "/ˈhælsiən/", translation: "平静的；幸福美好的", example: "We spent our halcyon days enjoying the sun on the beach.", exChn: "我们度过了在海滩上享受阳光的美好恬静时光。" },
-            { word: "Nostalgia", phonetic: "/nɒˈstældʒə/", translation: "怀旧；思乡情结", example: "Hearing that old song filled him with nostalgia.", exChn: "听到那首老歌让他心中充满了怀旧之情。" },
-            { word: "Solitude", phonetic: "/ˈsɒlɪtjuːd/", translation: "独处；惬意的孤独", example: "She enjoyed the peace and solitude of the mountains.", exChn: "她喜欢山峦间的宁静与怡然独处。" },
-            { word: "Melancholy", phonetic: "/ˈmelənkɒli/", translation: "忧郁的；伤感的", example: "The rainy weather always puts me in a melancholy mood.", exChn: "阴雨绵绵的天气总会让我陷入忧郁的心境。" },
-            { word: "Resilient", phonetic: "/rɪˈzɪliənt/", translation: "有韧性的；恢复力强的", example: "Our love is resilient enough to overcome the long distance.", exChn: "我们的爱足够坚韧，可以战胜异地的距离。" },
-            { word: "Eloquent", phonetic: "/ˈeləkwənt/", translation: "雄辩的；口才流利的", example: "His eloquent speech moved the entire audience.", exChn: "他辞藻流利、动人心弦的演讲打动了全场听众。" },
-            { word: "Luminescent", phonetic: "/ˌluːmɪˈnesnt/", translation: "发光的；冷光的", example: "The ocean was alive with luminescent organisms.", exChn: "海洋里充满了散发荧光的冷光生物。" },
-            { word: "Cherish", phonetic: "/ˈtʃerɪʃ/", translation: "珍爱；怀抱感恩之心", example: "I will always cherish the memories we created together.", exChn: "我会永远珍藏我们共同创造的那些回忆。" },
-            { word: "Infinite", phonetic: "/ˈɪnfɪnət/", translation: "无限的；无穷的", example: "My devotion to you is as infinite as the stars.", exChn: "我对你的挚爱就如满天繁星般无穷无尽。" },
-            { word: "Synergy", phonetic: "/ˈsɪnədʒi/", translation: "协同效应；共同合力", example: "The synergy between our teams resulted in a great success.", exChn: "我们团队之间的协同合作带来了巨大的成功。" },
-            { word: "Vibrant", phonetic: "/ˈvaɪbrənt/", translation: "生机勃勃的；鲜艳的", example: "The city has a vibrant culture that attracts young people.", exChn: "这座城市拥有吸引年轻人的生机勃勃的文化。" },
-            { word: "Wanderlust", phonetic: "/ˈwɒndəlʌst/", translation: "漫游癖；渴望远行", example: "Her wanderlust led her to explore every corner of the world.", exChn: "对远方的向往促使她去探索世界的每一个角落。" },
-            { word: "Tranquil", phonetic: "/ˈtræŋkwɪl/", translation: "安静的；风平浪静的", example: "We found a tranquil spot in the park to read books.", exChn: "我们在公园里找到了一处安静的角落看书。" },
-            { word: "Affection", phonetic: "/əˈfekʃn/", translation: "喜爱；温柔的情感", example: "He held deep affection for his childhood home.", exChn: "他对童年居住的家园怀有深深的依恋。" },
-            { word: "Devotion", phonetic: "/dɪˈvəʊʃn/", translation: "奉献；热爱；忠诚", example: "Their lifelong devotion to each other inspired everyone.", exChn: "他们执手一生的相守互信感动了所有人。" },
-            { word: "Eternity", phonetic: "/ɪˈtɜːnəti/", translation: "永恒；不朽", example: "A minute apart feels like an eternity when I miss you.", exChn: "想你的时候，分离的每一分钟都漫长如永恒。" },
-            { word: "Harmony", phonetic: "/ˈhɑːməni/", translation: "和谐；融洽相处", example: "They lived together in perfect harmony.", exChn: "他们在一起生活得非常融洽和谐。" },
-            { word: "Luminous", phonetic: "/ˈluːmɪnəs/", translation: "明亮的；柔和耀眼的", example: "The moon cast a luminous glow over the dark lake.", exChn: "月光给漆黑的湖面洒下一道皎洁的光辉。" },
-            { word: "Radiance", phonetic: "/ˈreɪdiəns/", translation: "容光焕发；光辉", example: "She looked at him with a radiance that lit up the room.", exChn: "她看向他时眼神明亮，瞬间点亮了整个房间。" },
-            { word: "Sincere", phonetic: "/sɪnˈsɪə(r)/", translation: "真诚的；由衷的", example: "Please accept our sincere apologies for the delay.", exChn: "请接受我们因延迟而产生的由衷歉意。" },
-            { word: "Tender", phonetic: "/ˈtendə(r)/", translation: "温柔的；易碎的", example: "He gave her a tender kiss before leaving.", exChn: "临别前，他给了她一个温柔的吻。" },
-            { word: "Yearning", phonetic: "/ˈjɜːnɪŋ/", translation: "渴望；深切的思念", example: "There is a deep yearning in my heart to see you soon.", exChn: "我心中怀着很快能见到你的深切思念。" },
-            { word: "Zeal", phonetic: "/ziːl/", translation: "热心；无限热情", example: "His zeal for learning languages is truly admirable.", exChn: "他对语言学习的高昂热情真的很令人钦佩。" },
-            { word: "Oblivion", phonetic: "/əˈblɪviən/", translation: "遗忘；湮没", example: "The old traditions are rapidly sinking into oblivion.", exChn: "古老的传统正迅速陷入被世人遗忘的境地。" },
-            { word: "Aurora", phonetic: "/ɔːˈrɔːrə/", translation: "极光", example: "We dream of watching the aurora together hand in hand.", exChn: "我们梦想着能手牵手一起去看极光。" },
-            { word: "Compassion", phonetic: "/kəmˈpæʃn/", translation: "同情心；怜悯悲悯", example: "She showed great compassion for the homeless animals.", exChn: "她对那些流浪动物展现出了极大的同情与爱心。" }
-        ];
+        // 初始化为空数组，等待从同一目录下的 words.json 中异步动态抓取加载
+        let wordList = []; 
 
-        // 系统全局动态变量
-        let currentCardIndex = 0;
+        // 全局状态控制变量
+        let myRegisteredName = "";
+        let currentStudyIdx = 0;
         let isCardFlipped = false;
+
+        // P2P 实时网络对战变量
+        let peer = null;
+        let p2pConnection = null;
+        let isHost = false;
         
-        let pkTimerInterval = null;
-        let pkTimeLeft = 60;
-        let pkScore = 0;
-        let pkCombo = 0;
-        let pkMaxCombo = 0;
-        let currentQuestion = null;
-        let activeOpponent = null;
+        let pkTimer = null;
+        let pkTimeLeft = 60; // 限时 60 秒
+        let myPkScore = 0;
+        let oppPkScore = 0;
+        let currentPkCombo = 0;
+        let currentPkQuestion = null;
+        let pkWordsPool = [];
 
-        // 浪漫轻量级文案随机库
-        const romanticQuotes = [
-            "“所爱隔山海，山海皆可平。”",
-            "“屏幕这端的每次努力，都是走向你的伏笔。”",
-            "“距离拉长了思念，而学习缩短了彼此的差距。”",
-            "“今天也是并肩看世界、偷偷想念你的第2026个瞬间。”",
-            "“两颗心若契合，千山万水也不过是咫尺。”"
-        ];
+        // 页面初始化：异步加载外置 JSON 词库
+        window.onload = async function() {
+            try {
+                // 核心改动：从同级目录抓取异步词库
+                const response = await fetch('words.json');
+                if (!response.ok) throw new Error('未能成功加载 words.json，请确认文件是否存在。');
+                wordList = await response.json();
+                
+                showToast(`📚 雅思词库满血加载！共 ${wordList.length} 个单词`);
+                renderCard(); 
+            } catch (e) {
+                console.error(e);
+                showToast("❌ 词库加载失败，请检查 words.json 文件是否存在且格式正确");
+                // 应急兜底词，确保空文件时网页不崩溃
+                wordList = [
+                    { word: "Meticulous", phonetic: "/məˈtɪkjələs/", translation: "一丝不苟的", example: "She was meticulous about her design.", exChn: "她对设计一丝不苟。" }
+                ];
+                renderCard();
+            }
 
-        // 浏览器 Web Audio API 极简纯代码音频合成器（规避静态音频外链失效问题）
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playSound(type) {
-            if (!audioCtx) return;
-            // 确保音频上下文被激活
-            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            // 预填缓存的曾用名
+            const saved = localStorage.getItem('love_pk_my_username');
+            if(saved) {
+                document.getElementById('username-input').value = saved;
+            }
+        };
+
+        // 身份花名册唯一锁定逻辑
+        function registerUser() {
+            const input = document.getElementById('username-input').value.trim();
+            if(!input) {
+                showToast("⚠️ 名字不能为空哦！");
+                return;
+            }
+            if(/[^a-zA-Z0-9\u4e00-\u9fa5]/.test(input)) {
+                showToast("⚠️ 请使用纯中文、英文或数字命名！");
+                return;
+            }
+
+            myRegisteredName = input;
             
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
+            // 拼接唯一识别前缀，规避全球 PeerJS 用户命名冲突
+            const peerId = "love-vocab-2026-" + myRegisteredName;
+            
+            showToast("📡 正在连接云端通信信令塔...");
+            document.getElementById('connection-status').innerText = "📡 正在云端抢占注册唯一名字中...";
 
-            if (type === 'correct') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.12); // A5
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.15);
-            } else if (type === 'wrong') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
-                osc.frequency.linearRampToValueAtTime(146.83, audioCtx.currentTime + 0.2); // D3
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-            } else if (type === 'win') {
-                // 三和弦胜利音
-                [523.25, 659.25, 783.99].forEach((freq, idx) => {
-                    const o = audioCtx.createOscillator();
-                    const g = audioCtx.createGain();
-                    o.connect(g); g.connect(audioCtx.destination);
-                    o.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.08);
-                    g.gain.setValueAtTime(0.1, audioCtx.currentTime + idx * 0.08);
-                    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-                    o.start(audioCtx.currentTime + idx * 0.08);
-                    o.stop(audioCtx.currentTime + 0.4);
-                });
+            peer = new Peer(peerId);
+
+            peer.on('open', function(id) {
+                showToast("✨ 身份锁定成功！");
+                localStorage.setItem('love_pk_my_username', myRegisteredName);
+                
+                document.getElementById('sec-login').classList.add('hidden');
+                document.getElementById('main-dashboard').classList.remove('hidden');
+                document.getElementById('user-badge').classList.remove('hidden');
+                document.getElementById('display-my-name').innerText = myRegisteredName;
+                document.getElementById('arena-my-name').innerText = myRegisteredName;
+                
+                document.getElementById('connection-status').innerText = `📡 房间待命中。名字: 【${myRegisteredName}】`;
+                
+                // 顺便解析链接中是否包含自动呼叫邀请
+                checkUrlInvitation();
+            });
+
+            peer.on('error', function(err) {
+                console.error(err);
+                if(err.type === 'unavailable-id') {
+                    showToast("❌ 这个名字已经被占用啦！请换个独一无二的。");
+                    document.getElementById('connection-status').innerText = "❌ 连线失败：名字全网重复。";
+                    peer.destroy();
+                } else {
+                    showToast("❌ 信令服务器握手失败: " + err.type);
+                }
+            });
+
+            // 房东身份：监听来自伴侣的呼叫
+            peer.on('connection', function(conn) {
+                p2pConnection = conn;
+                isHost = true;
+                setupConnectionListeners();
+            });
+        }
+
+        // P2P 实时数据管道中转站
+        function setupConnectionListeners() {
+            document.getElementById('connection-status').innerHTML = `⚡ 正在和伴侣 <strong>${p2pConnection.peer.replace("love-vocab-2026-", "")}</strong> 建立量子连线...`;
+            
+            p2pConnection.on('open', function() {
+                showToast("⚔️ 联机成功！对战舱门已开启。");
+                const oppName = p2pConnection.peer.replace("love-vocab-2026-", "");
+                document.getElementById('arena-opp-name').innerText = oppName;
+                document.getElementById('connection-status').innerHTML = `🟩 已与 【${oppName}】 保持跨时空实时在线连接！`;
+                
+                if(isHost) {
+                    generateAndSyncMatchPool();
+                }
+            });
+
+            p2pConnection.on('data', function(data) {
+                switch(data.type) {
+                    case 'INIT_POOL': 
+                        pkWordsPool = data.pool;
+                        sendData({type: 'READY_TO_START'});
+                        break;
+                    case 'READY_TO_START':
+                        if(isHost) {
+                            sendData({type: 'START_GAME'});
+                            triggerStartPkGame();
+                        }
+                        break;
+                    case 'START_GAME':
+                        if(!isHost) triggerStartPkGame();
+                        break;
+                    case 'OPP_SCORE_UPDATE': 
+                        oppPkScore = data.score;
+                        document.getElementById('arena-opp-score').innerText = oppPkScore;
+                        break;
+                    case 'GAME_OVER_SYNC': 
+                        oppPkScore = data.score;
+                        handleMatchEnded();
+                        break;
+                }
+            });
+
+            p2pConnection.on('close', function() {
+                showToast("📡 伴侣已断开连接。");
+                quitToLobby();
+            });
+        }
+
+        function sendData(obj) {
+            if(p2pConnection && p2pConnection.open) {
+                p2pConnection.send(obj);
             }
         }
 
-        // 初始化加载
-        window.onload = function() {
-            initProfiles();
-            renderCard();
-            renderLeaderboard();
-            // 随机分配一句浪漫箴言
-            document.getElementById('romantic-quote').innerText = romanticQuotes[Math.floor(Math.random() * romanticQuotes.length)];
-        };
-
-        // ==================== 身份缓存处理 ====================
-        function initProfiles() {
-            const myName = localStorage.getItem('love_my_name') || '麦麦';
-            const partnerName = localStorage.getItem('love_partner_name') || '冬冬';
-            document.getElementById('my-name-input').value = myName;
-            document.getElementById('partner-name-input').value = partnerName;
+        // 发起邀请
+        function generateLiveInvite() {
+            if(!myRegisteredName) return;
+            const inviteUrl = `${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(myRegisteredName)}`;
+            navigator.clipboard.writeText(inviteUrl).then(() => {
+                showToast("📋 专属对战网址已成功复制！快发给异地伴侣点击！");
+            }).catch(() => {
+                prompt("请手动复制下方联机网址发给伴侣：", inviteUrl);
+            });
         }
 
-        function saveProfiles() {
-            const myName = document.getElementById('my-name-input').value.trim() || '麦麦';
-            const partnerName = document.getElementById('partner-name-input').value.trim() || '冬冬';
-            localStorage.setItem('love_my_name', myName);
-            localStorage.setItem('love_partner_name', partnerName);
-            showToast("✨ 身份花名册更新成功！");
-            renderLeaderboard();
+        // 呼叫连线
+        function connectToPeerFromInput() {
+            const target = document.getElementById('peer-id-input').value.trim();
+            if(!target) { showToast("请输入对方当前的名字！"); return; }
+            if(target === myRegisteredName) { showToast("不能挑战自己哦！"); return; }
+            
+            const fullTargetId = "love-vocab-2026-" + target;
+            document.getElementById('connection-status').innerText = `🚀 正在全网搜寻并呼叫 【${target}】...`;
+            
+            p2pConnection = peer.connect(fullTargetId);
+            isHost = false;
+            setupConnectionListeners();
         }
 
-        // ==================== Tab 标签切换逻辑 ====================
+        function checkUrlInvitation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const invitePlayer = urlParams.get('invite');
+            if(invitePlayer && invitePlayer !== myRegisteredName) {
+                document.getElementById('peer-id-input').value = invitePlayer;
+                showToast(`🔔 侦测到来自 【${invitePlayer}】 的挑战书，正自动连线中...`);
+                connectToPeerFromInput();
+            }
+        }
+
+        function generateAndSyncMatchPool() {
+            if(wordList.length === 0) return;
+            let tempPool = [];
+            for(let i=0; i<wordList.length; i++) tempPool.push(i);
+            tempPool.sort(() => Math.random() - 0.5);
+            pkWordsPool = tempPool;
+            sendData({type: 'INIT_POOL', pool: tempPool});
+        }
+
+        // 进入限时 1分钟 对局
+        function triggerStartPkGame() {
+            document.getElementById('pk-lobby').classList.add('hidden');
+            document.getElementById('pk-summary').classList.add('hidden');
+            document.getElementById('pk-arena').classList.remove('hidden');
+
+            myPkScore = 0;
+            oppPkScore = 0;
+            currentPkCombo = 0;
+            pkTimeLeft = 60; // 60秒限时
+
+            document.getElementById('arena-my-score').innerText = 0;
+            document.getElementById('arena-opp-score').innerText = 0;
+            document.getElementById('combo-tracker').innerText = "Combo: 0";
+            
+            renderNextPkQuestion();
+
+            if(pkTimer) clearInterval(pkTimer);
+            const progressBar = document.getElementById('pk-progress');
+            progressBar.style.width = '100%';
+
+            pkTimer = setInterval(() => {
+                pkTimeLeft--;
+                document.getElementById('pk-timer-badge').innerText = `${pkTimeLeft}s`;
+                progressBar.style.width = `${(pkTimeLeft / 60) * 100}%`;
+
+                if(pkTimeLeft <= 0) {
+                    clearInterval(pkTimer);
+                    sendData({type: 'GAME_OVER_SYNC', score: myPkScore});
+                    handleMatchEnded();
+                }
+            }, 1000);
+        }
+
+        function renderNextPkQuestion() {
+            if(wordList.length === 0) return;
+            if(pkWordsPool.length === 0) {
+                for(let i=0; i<wordList.length; i++) pkWordsPool.push(i);
+                pkWordsPool.sort(() => Math.random() - 0.5);
+            }
+            const currentWordIdx = pkWordsPool.pop();
+            const correctWord = wordList[currentWordIdx];
+
+            let options = [correctWord.translation];
+            while(options.length < 4) {
+                const rand = wordList[Math.floor(Math.random() * wordList.length)].translation;
+                if(!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            currentPkQuestion = { eng: correctWord.word, correct: correctWord.translation };
+            document.getElementById('pk-question').innerText = currentPkQuestion.eng;
+
+            const optsDiv = document.getElementById('pk-options');
+            optsDiv.innerHTML = '';
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                // 选项大字号
+                btn.className = "w-full text-left p-4 bg-sketch-paper hand-border-sm hand-shadow-sm text-xl font-hand font-bold smooth-transition hover:bg-sketch-bg flex justify-between items-center group";
+                btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-pencil text-sketch-ink/20 group-hover:text-sketch-accent transition-colors"></i>`;
+                btn.onclick = () => checkPkAnswer(btn, opt);
+                optsDiv.appendChild(btn);
+            });
+        }
+
+        function checkPkAnswer(btn, chosen) {
+            const allBtns = document.getElementById('pk-options').querySelectorAll('button');
+            allBtns.forEach(b => b.disabled = true);
+
+            const isRight = (chosen === currentPkQuestion.correct);
+            if(isRight) {
+                currentPkCombo++;
+                let gain = 10 + (currentPkCombo >= 3 ? Math.min(currentPkCombo * 2, 20) : 0);
+                myPkScore += gain;
+                document.getElementById('arena-my-score').innerText = myPkScore;
+                document.getElementById('combo-tracker').innerText = `Combo: 🔥 ${currentPkCombo}`;
+                
+                btn.classList.add('bg-sketch-sage/20', 'text-sketch-sage');
+                btn.style.borderColor = '#2A9D8F';
+                
+                sendData({type: 'OPP_SCORE_UPDATE', score: myPkScore});
+                setTimeout(renderNextPkQuestion, 300);
+            } else {
+                currentPkCombo = 0;
+                document.getElementById('combo-tracker').innerText = "Combo: 0";
+                btn.classList.add('bg-sketch-accent/20', 'text-sketch-accent');
+                btn.style.borderColor = '#E76F51';
+
+                allBtns.forEach(b => {
+                    if(b.querySelector('span').innerText === currentPkQuestion.correct) {
+                        b.classList.add('bg-sketch-sage/10');
+                        b.style.borderColor = '#2A9D8F';
+                    }
+                });
+                setTimeout(renderNextPkQuestion, 800);
+            }
+        }
+
+        function handleMatchEnded() {
+            if(pkTimer) clearInterval(pkTimer);
+            document.getElementById('pk-arena').classList.add('hidden');
+            document.getElementById('pk-summary').classList.remove('hidden');
+
+            document.getElementById('sum-my-score').innerText = myPkScore;
+            document.getElementById('sum-opp-score').innerText = oppPkScore;
+
+            let winText = "";
+            if(myPkScore > oppPkScore) {
+                winText = "🏆 战神降临！你在本次极限倒计时中胜出！";
+            } else if (myPkScore < oppPkScore) {
+                winText = "🍫 惜败！伴侣今天手速超群，快去给Ta准备一个小零食奖励吧！";
+            } else {
+                winText = "💖 惊人的平局！这不可思议的默契，必须合影留念！";
+            }
+            document.getElementById('summary-text').innerText = winText;
+        }
+
+        function quitToLobby() {
+            document.getElementById('pk-summary').classList.add('hidden');
+            document.getElementById('pk-arena').classList.add('hidden');
+            document.getElementById('pk-lobby').classList.remove('hidden');
+            if(isHost) {
+                generateAndSyncMatchPool();
+            }
+        }
+
+        // 单词浏览卡片控制
         function switchTab(target) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`sec-${target}`).classList.remove('hidden');
-
-            const tabs = ['study', 'pk', 'leaderboard'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-${t}`);
-                if(t === target) {
-                    btn.classList.add('border-morandi-clay', 'text-morandi-text');
-                    btn.classList.remove('border-transparent', 'text-morandi-muted');
-                } else {
-                    btn.classList.remove('border-morandi-clay', 'text-morandi-text');
-                    btn.classList.add('border-transparent', 'text-morandi-muted');
-                }
-            });
-            if (target === 'leaderboard') renderLeaderboard();
         }
 
-        // ==================== 卡片模块核心交互 ====================
         function renderCard() {
-            const word = wordList[currentCardIndex];
-            const displayIdx = `${String(currentCardIndex + 1).padStart(2, '0')} / ${wordList.length}`;
+            if(wordList.length === 0) return;
+            const word = wordList[currentStudyIdx];
+            const idxStr = `${String(currentStudyIdx + 1).padStart(3, '0')} / ${wordList.length}`;
             
-            // 每次切换时先无缝恢复无翻转姿态
             const fc = document.getElementById('flashcard');
             fc.classList.remove('rotate-y-180');
             isCardFlipped = false;
 
             setTimeout(() => {
-                document.getElementById('card-index-front').innerText = displayIdx;
-                document.getElementById('card-index-back').innerText = displayIdx;
+                document.getElementById('study-index-1').innerText = idxStr;
+                document.getElementById('study-index-2').innerText = idxStr;
                 document.getElementById('word-eng').innerText = word.word;
                 document.getElementById('word-phonetic').innerText = word.phonetic;
                 document.getElementById('word-chn').innerText = word.translation;
                 document.getElementById('word-ex-eng').innerText = `"${word.example}"`;
                 document.getElementById('word-ex-chn').innerText = word.exChn;
-                document.getElementById('study-progress-text').innerText = displayIdx;
+                document.getElementById('study-progress').innerText = `${currentStudyIdx + 1} / ${wordList.length}`;
             }, 150);
         }
 
         function flipCard() {
+            if(wordList.length === 0) return;
             isCardFlipped = !isCardFlipped;
             const fc = document.getElementById('flashcard');
-            if (isCardFlipped) {
-                fc.classList.add('rotate-y-180');
-            } else {
-                fc.classList.remove('rotate-y-180');
-            }
+            if(isCardFlipped) fc.classList.add('rotate-y-180');
+            else fc.classList.remove('rotate-y-180');
         }
 
         function prevCard() {
-            currentCardIndex = (currentCardIndex - 1 + wordList.length) % wordList.length;
+            if(wordList.length === 0) return;
+            currentStudyIdx = (currentStudyIdx - 1 + wordList.length) % wordList.length;
             renderCard();
         }
 
         function nextCard() {
-            currentCardIndex = (currentCardIndex + 1) % wordList.length;
+            if(wordList.length === 0) return;
+            currentStudyIdx = (currentStudyIdx + 1) % wordList.length;
             renderCard();
         }
 
         function speakWord(event) {
-            event.stopPropagation(); // 阻止触发卡片翻转
-            const word = wordList[currentCardIndex].word;
+            event.stopPropagation();
+            if(wordList.length === 0) return;
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(word);
+                const utterance = new SpeechSynthesisUtterance(wordList[currentStudyIdx].word);
                 utterance.lang = 'en-US';
                 utterance.rate = 0.85;
                 window.speechSynthesis.speak(utterance);
-            } else {
-                showToast("当前设备不支持浏览器语音外放");
             }
         }
 
-        // ==================== PK核心逻辑控制 ====================
-        function startPK() {
-            document.getElementById('pk-intro').classList.add('hidden');
-            document.getElementById('pk-result').classList.add('hidden');
-            document.getElementById('pk-arena').classList.remove('hidden');
-
-            pkScore = 0;
-            pkCombo = 0;
-            pkMaxCombo = 0;
-            pkTimeLeft = 60;
-            
-            document.getElementById('pk-score').innerText = pkScore;
-            document.getElementById('pk-combo').innerText = pkCombo;
-            document.getElementById('pk-timer').innerText = `${pkTimeLeft}s`;
-            document.getElementById('combo-box').style.opacity = '0';
-
-            nextQuestion();
-
-            // 定时器构建
-            if (pkTimerInterval) clearInterval(pkTimerInterval);
-            const progressBar = document.getElementById('pk-progress-bar');
-            progressBar.style.width = '100%';
-
-            pkTimerInterval = setInterval(() => {
-                pkTimeLeft--;
-                document.getElementById('pk-timer').innerText = `${pkTimeLeft}s`;
-                progressBar.style.width = `${(pkTimeLeft / 60) * 100}%`;
-
-                if (pkTimeLeft <= 0) {
-                    endPK();
-                }
-            }, 1000);
-        }
-
-        // 生成4选1干扰项题目
-        function nextQuestion() {
-            const randIdx = Math.floor(Math.random() * wordList.length);
-            const correctWord = wordList[randIdx];
-            
-            let options = [correctWord.translation];
-            while (options.length < 4) {
-                const pick = wordList[Math.floor(Math.random() * wordList.length)].translation;
-                if (!options.includes(pick)) {
-                    options.push(pick);
-                }
-            }
-            // 数组随机乱序
-            options.sort(() => Math.random() - 0.5);
-
-            currentQuestion = {
-                word: correctWord.word,
-                correct: correctWord.translation
-            };
-
-            document.getElementById('pk-question-word').innerText = currentQuestion.word;
-            
-            const grid = document.getElementById('pk-options-grid');
-            grid.innerHTML = '';
-            
-            options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl border border-morandi-cardBorder hover:bg-stone-50 text-xs font-normal smooth-transition flex justify-between items-center group";
-                btn.innerHTML = `<span>${opt}</span><i class="fa-regular fa-circle text-stone-300 group-hover:text-morandi-clay transition-colors"></i>`;
-                btn.onclick = () => selectOption(btn, opt);
-                grid.appendChild(btn);
-            });
-        }
-
-        function selectOption(btnElement, chosenText) {
-            // 禁止连点
-            const allBtns = document.getElementById('pk-options-grid').querySelectorAll('button');
-            allBtns.forEach(b => b.disabled = true);
-
-            const isCorrect = (chosenText === currentQuestion.correct);
-            const icon = btnElement.querySelector('i');
-
-            if (isCorrect) {
-                playSound('correct');
-                pkCombo++;
-                if (pkCombo > pkMaxCombo) pkMaxCombo = pkCombo;
-                
-                // 计分公式：基础10分 + 连击奖励系数
-                let pointsGained = 10;
-                if (pkCombo >= 3) { pointsGained += Math.min(pkCombo * 2, 20); } // 封顶单题加30分
-                pkScore += pointsGained;
-
-                document.getElementById('pk-score').innerText = pkScore;
-                
-                // 连击UI显性回馈
-                const comboBox = document.getElementById('combo-box');
-                document.getElementById('pk-combo').innerText = pkCombo;
-                if (pkCombo >= 2) {
-                    comboBox.className = "smooth-transition bg-morandi-rose text-white font-mono px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider opacity-100 scale-110";
-                }
-
-                // 正确样式变换
-                btnElement.classList.remove('border-morandi-cardBorder', 'hover:bg-stone-50');
-                btnElement.classList.add('bg-morandi-sage/20', 'border-morandi-sage', 'text-morandi-sage-text');
-                icon.className = "fa-solid fa-circle-check text-morandi-sage text-sm";
-                
-                setTimeout(() => {
-                    comboBox.classList.remove('scale-110');
-                    nextQuestion();
-                }, 400);
-
-            } else {
-                playSound('wrong');
-                pkCombo = 0;
-                document.getElementById('combo-box').className = "smooth-transition opacity-0 scale-75";
-
-                // 错误反馈处理
-                btnElement.classList.remove('border-morandi-cardBorder');
-                btnElement.classList.add('bg-morandi-rose/10', 'border-morandi-rose', 'text-morandi-rose');
-                icon.className = "fa-solid fa-circle-xmark text-morandi-rose text-sm";
-
-                // 高亮标出正确答案
-                allBtns.forEach(b => {
-                    if (b.querySelector('span').innerText === currentQuestion.correct) {
-                        b.classList.add('bg-morandi-sage/10', 'border-morandi-sage');
-                        b.querySelector('i').className = "fa-solid fa-circle-check text-morandi-sage";
-                    }
-                });
-
-                setTimeout(() => {
-                    nextQuestion();
-                }, 1000);
-            }
-        }
-
-        function endPK() {
-            if (pkTimerInterval) clearInterval(pkTimerInterval);
-            playSound('win');
-            
-            document.getElementById('pk-arena').classList.add('hidden');
-            document.getElementById('pk-result').classList.remove('hidden');
-
-            document.getElementById('result-score').innerText = pkScore;
-            document.getElementById('result-maxcombo').innerText = pkMaxCombo;
-
-            const myName = document.getElementById('my-name-input').value.trim() || '我';
-            
-            // 文案差异化评价
-            let evaluation = `挑战结束！${myName}今天拿到了 ${pkScore} 分！`;
-            if (activeOpponent) {
-                if (pkScore > activeOpponent.score) {
-                    evaluation = `🎉 逆袭成功！你成功打破了 ${activeOpponent.name} 的纪录 (${activeOpponent.score}分)！快去炫耀一下吧。`;
-                    triggerConfetti();
-                } else if (pkScore === activeOpponent.score) {
-                    evaluation = `🤝 竟然平局！你与 ${activeOpponent.name} 旗鼓相当，均为 ${pkScore} 分！这就是默契吗？`;
-                } else {
-                    evaluation = `差距还剩 ${activeOpponent.name} 的纪录 ${(activeOpponent.score - pkScore)} 分，继续努力，爱可以平定山海！`;
-                }
-            } else {
-                if (pkScore >= 150) { triggerConfetti(); evaluation += " 词汇量惊人，快去向伴侣发起挑战吧！"; }
-            }
-            document.getElementById('pk-result-eval').innerText = evaluation;
-
-            // 存入 LocalStorage 荣誉榜
-            saveLeaderboardItem(myName, pkScore, pkMaxCombo);
-        }
-
-        function resetPkView() {
-            cancelChallenge();
-            document.getElementById('pk-result').classList.add('hidden');
-            document.getElementById('pk-intro').classList.remove('hidden');
-        }
-
-        // ==================== 异地接力加密解密算法 (Base64令牌) ====================
-        function copyChallengeCode() {
-            const myName = document.getElementById('my-name-input').value.trim() || '麦麦';
-            const payload = {
-                name: myName,
-                score: pkScore,
-                combo: pkMaxCombo,
-                ts: Date.now()
-            };
-            // 转化为令牌密文
-            const token = "LOVEPK-" + btoa(encodeURIComponent(JSON.stringify(payload)));
-            
-            // 复制到系统剪贴板
-            navigator.clipboard.writeText(token).then(() => {
-                showToast("📋 挑战密文已复制！快去微信发给伴侣吧。");
-            }).catch(() => {
-                // 降级兼容手动弹框提示
-                prompt("复制失败，请手动复制下方密文发给伴侣：", token);
-            });
-        }
-
-        function importChallenge() {
-            const rawInput = document.getElementById('challenge-code-input').value.trim();
-            if (!rawInput.startsWith("LOVEPK-")) {
-                showToast("❌ 无效的挑战码，请确认是否复制完整。");
-                return;
-            }
-            try {
-                const base64Str = rawInput.replace("LOVEPK-", "");
-                const decrypted = JSON.parse(decodeURIComponent(atob(base64Str)));
-                
-                activeOpponent = {
-                    name: decrypted.name,
-                    score: decrypted.score,
-                    combo: decrypted.combo
-                };
-
-                // 更新运行区浮动卡片
-                document.getElementById('opp-name').innerText = activeOpponent.name;
-                document.getElementById('opp-score').innerText = activeOpponent.score;
-                document.getElementById('opponent-badge').classList.remove('hidden');
-                
-                showToast(`⚔️ 成功装载 ${activeOpponent.name} 的挑战！终点线已设立。`);
-                document.getElementById('challenge-code-input').value = '';
-            } catch(e) {
-                showToast("❌ 挑战码解析失败，内部数据可能有损。");
-            }
-        }
-
-        function cancelChallenge() {
-            activeOpponent = null;
-            document.getElementById('opponent-badge').classList.add('hidden');
-        }
-
-        // ==================== 榜单数据持久化存储 ====================
-        function saveLeaderboardItem(name, score, combo) {
-            let list = JSON.parse(localStorage.getItem('love_pk_board')) || [];
-            list.push({
-                name: name,
-                score: score,
-                combo: combo,
-                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-            });
-            // 仅截留最新的 50 条记录
-            list.sort((a, b) => b.score - a.score);
-            if (list.length > 50) list = list.slice(0, 50);
-            localStorage.setItem('love_pk_board', list.stringify ? JSON.stringify(list) : JSON.stringify(list));
-        }
-
-        function renderLeaderboard() {
-            const list = JSON.parse(localStorage.getItem('love_pk_board')) || [];
-            const tbody = document.getElementById('leaderboard-tbody');
-            tbody.innerHTML = '';
-
-            const myName = document.getElementById('my-name-input').value.trim() || '麦麦';
-            const partnerName = document.getElementById('partner-name-input').value.trim() || '冬冬';
-
-            let myWins = 0;
-            let partnerWins = 0;
-
-            if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-morandi-muted/60 font-light italic">暂无比拼记录，点击“异地竞技场”开始第一场战役吧 ~</td></tr>`;
-            } else {
-                list.forEach(item => {
-                    const isMe = (item.name === myName);
-                    if (item.name === myName) myWins++;
-                    else if (item.name === partnerName) partnerWins++;
-
-                    const tr = document.createElement('tr');
-                    tr.className = "border-b border-morandi-cardBorder/40 hover:bg-morandi-bg/30 smooth-transition";
-                    tr.innerHTML = `
-                        <td class="p-3.5 pl-5 font-medium">
-                            <span class="px-2 py-0.5 rounded text-[10px] ${isMe ? 'bg-morandi-clay/10 text-morandi-clay' : 'bg-morandi-sage/10 text-morandi-sage'}">${item.name}</span>
-                        </td>
-                        <td class="p-3.5 font-bold font-mono text-morandi-text">${item.score}</td>
-                        <td class="p-3.5 font-mono text-morandi-muted">${item.combo}</td>
-                        <td class="p-3.5 pr-5 text-right font-light text-morandi-muted/80 text-[11px]">${item.date}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-
-            // 更新环形或条形对比图
-            document.getElementById('stat-my-label').innerText = `${myName} (${myWins}场记)`;
-            document.getElementById('stat-partner-label').innerText = `(${partnerWins}场记) ${partnerName}`;
-            
-            const total = myWins + partnerWins;
-            const barMy = document.getElementById('bar-my-win');
-            const barPartner = document.getElementById('bar-partner-win');
-            if (total === 0) {
-                barMy.style.width = '50%';
-                barPartner.style.width = '50%';
-            } else {
-                barMy.style.width = `${(myWins / total) * 100}%`;
-                barPartner.style.width = `${(partnerWins / total) * 100}%`;
-            }
-        }
-
-        function clearLeaderboard() {
-            if (confirm("确定要格式化清除所有的历史荣誉战绩榜吗？")) {
-                localStorage.removeItem('love_pk_board');
-                renderLeaderboard();
-                showToast("🧹 荣誉榜已重置。");
-            }
-        }
-
-        // ==================== 轻量级全局工具组件 ====================
         function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 2500);
-        }
-
-        // 简易喷花撒落动效
-        function triggerConfetti() {
-            const canvas = document.getElementById('confetti-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            let particles = [];
-            const colors = ['#C6A99A', '#A3B19B', '#D4A3A3', '#EBE5DA', '#8C8275'];
-            
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * -50,
-                    r: Math.random() * 5 + 3,
-                    vy: Math.random() * 3 + 2,
-                    vx: Math.random() * 2 - 1,
-                    color: colors[Math.floor(Math.random() * colors.length)]
-                });
-            }
-            
-            let animationFrame;
-            function update() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                let alive = false;
-                particles.forEach(p => {
-                    p.y += p.vy;
-                    p.x += p.vx;
-                    if (p.y < canvas.height) alive = true;
-                    
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.fill();
-                });
-                
-                if (alive) {
-                    animationFrame = requestAnimationFrame(update);
-                } else {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    cancelAnimationFrame(animationFrame);
-                }
-            }
-            update();
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 3000);
         }
     </script>
 </body>

@@ -1,1 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 手绘风 · 雅思双人强同步实时PK舱</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        hand: ['"Architects Daughter"', '"ZCOOL KuaiLe"', 'cursive'],
+                    },
+                    colors: {
+                        sketch: {
+                            bg: '#FDFBF7',       /* 复古手绘牛皮纸色 */
+                            ink: '#2B2A27',      /* 铅笔浓墨色 */
+                            paper: '#FFFFFF',    /* 纯白卡片 */
+                            accent: '#E76F51',   /* 温暖涂鸦红 */
+                            sage: '#2A9D8F',     /* 治愈手绘绿 */
+                            sky: '#4EA8DE'       /* 晴空手绘蓝 */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hand-border {
+            border: 3px solid #2B2A27;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-border-sm {
+            border: 2px solid #2B2A27;
+            border-radius: 12px 4px 12px 4px/4px 12px 4px 12px;
+        }
+        .hand-shadow { box-shadow: 5px 5px 0px 0px #2B2A27; }
+        .hand-shadow-sm { box-shadow: 3px 3px 0px 0px #2B2A27; }
+        .hand-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #2B2A27;
+        }
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+    </style>
+</head>
+<body class="bg-sketch-bg text-sketch-ink font-sans min-h-screen flex flex-col p-4 md:p-8 antialiased selection:bg-sketch-accent/20 select-none">
+
+    <header class="w-full max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+        <div class="flex items-center gap-3">
+            <div class="text-4xl text-sketch-accent"><i class="fa-solid fa-pencil"></i></div>
+            <div>
+                <h1 class="text-3xl md:text-4xl font-hand font-bold tracking-wider">雅思单词 · 真实时同步PK舱</h1>
+                <p class="text-base font-hand text-sketch-ink/70">"同屏同题、实时博弈 ✏️ 限时 60 秒极限对决"</p>
+            </div>
+        </div>
+        <div id="user-badge" class="hidden bg-sketch-paper px-5 py-2.5 hand-border-sm hand-shadow-sm text-base font-hand font-bold">
+            <i class="fa-solid fa-user text-sketch-sage mr-1"></i> 登录身份: <span id="display-my-name" class="text-sketch-accent">未解锁</span>
+        </div>
+    </header>
+
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-sketch-ink text-white px-6 py-3 hand-border-sm hand-shadow text-base font-medium z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        提示内容
+    </div>
+
+    <main class="flex-grow w-full max-w-4xl mx-auto flex flex-col">
+
+        <section id="sec-login" class="block max-w-md w-full mx-auto my-auto p-8 bg-sketch-paper hand-border hand-shadow space-y-6">
+            <div class="text-center space-y-2">
+                <div class="text-6xl text-sketch-sage font-hand"><i class="fa-solid fa-signature"></i></div>
+                <h2 class="text-2xl font-bold font-hand">输入你的唯一花名</h2>
+                <p class="text-sm text-sketch-ink/60">名字将用于建立你们两人之间的专属实时通信信道。</p>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="username-input" placeholder="输入专属花名" class="w-full bg-sketch-bg p-4 hand-border-sm text-lg font-bold tracking-wide text-center focus:outline-none focus:border-sketch-accent transition-colors">
+                <button onclick="registerUser()" class="w-full hand-btn bg-sketch-sage hover:bg-sketch-sage text-white p-4 hand-border-sm hand-shadow-sm font-bold text-lg tracking-widest smooth-transition">
+                    进入背词与对战大厅 🚪
+                </button>
+            </div>
+        </section>
+
+        <div id="main-dashboard" class="hidden flex-grow flex flex-col">
+            <div class="flex justify-center gap-6 mb-8">
+                <button onclick="switchTab('study')" id="tab-study" class="hand-btn py-2.5 px-8 bg-sketch-paper hand-border-sm hand-shadow-sm text-lg font-bold font-hand flex items-center gap-2 smooth-transition">
+                    <i class="fa-solid fa-graduation-cap text-sketch-sky"></i> 单词自由背
+                </button>
+                <button onclick="switchTab('pk')" id="tab-pk" class="hand-btn py-2.5 px-8 bg-sketch-paper hand-border-sm hand-shadow-sm text-lg font-bold font-hand flex items-center gap-2 smooth-transition">
+                    <i class="fa-solid fa-gamepad text-sketch-accent"></i> 线上实时同步PK
+                </button>
+            </div>
+
+            <section id="sec-study" class="tab-content block space-y-6">
+                <div class="flex flex-col items-center justify-center py-4">
+                    <div class="w-full max-w-xl h-[26rem] perspective-1000 cursor-pointer" onclick="flipCard()">
+                        <div id="flashcard" class="w-full h-full preserve-3d smooth-transition relative bg-sketch-paper hand-border hand-shadow">
+                            <div class="absolute inset-0 backface-hidden flex flex-col justify-between p-8">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-base font-hand font-bold text-sketch-ink/60" id="study-index-1">000 / 0000</span>
+                                    <button onclick="speakWord(event)" class="text-sketch-ink/70 hover:text-sketch-accent p-2 text-2xl" title="朗读发音"><i class="fa-solid fa-volume-high"></i></button>
+                                </div>
+                                <div class="text-center my-auto">
+                                    <h2 class="text-5xl md:text-6xl font-bold font-hand tracking-wide text-sketch-ink" id="word-eng">Loading...</h2>
+                                    <p class="text-xl text-sketch-ink/60 mt-4 font-mono tracking-wide" id="word-phonetic">/ ... /</p>
+                                </div>
+                                <p class="text-center text-sm font-hand text-sketch-ink/40 tracking-wider">✏️ 点击卡片翻面看看释义</p>
+                            </div>
+                            <div class="absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between p-8 bg-[#FBF9F3]">
+                                <span class="text-base font-hand font-bold text-sketch-ink/60" id="study-index-2">000 / 0000</span>
+                                <div class="my-auto space-y-6 text-center">
+                                    <h3 class="text-3xl md:text-4xl font-bold text-sketch-accent" id="word-chn">加载中...</h3>
+                                    <div class="p-5 border-2 border-dashed border-sketch-ink/30 rounded-2xl bg-white text-left">
+                                        <p class="text-lg font-hand leading-relaxed italic" id="word-ex-eng">"Please wait a second."</p>
+                                        <p class="text-base mt-2 text-sketch-ink/70" id="word-ex-chn">请稍等片刻。</p>
+                                    </div>
+                                </div>
+                                <p class="text-center text-sm font-hand text-sketch-ink/40 tracking-wider">✏️ 点击卡片翻回正面</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-10 mt-8">
+                        <button onclick="prevCard()" class="hand-btn w-16 h-16 bg-sketch-paper hand-border-sm hand-shadow-sm flex items-center justify-center text-2xl hover:bg-sketch-bg smooth-transition"><i class="fa-solid fa-arrow-left"></i></button>
+                        <span class="text-lg font-bold font-hand" id="study-progress">0 / 0</span>
+                        <button onclick="nextCard()" class="hand-btn w-16 h-16 bg-sketch-paper hand-border-sm hand-shadow-sm flex items-center justify-center text-2xl hover:bg-sketch-bg smooth-transition"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-pk" class="tab-content hidden max-w-2xl mx-auto w-full">
+                <div id="pk-lobby" class="bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
+                    <div class="text-center space-y-2">
+                        <div class="text-6xl text-sketch-accent font-hand"><i class="fa-solid fa-wifi"></i></div>
+                        <h2 class="text-2xl md:text-3xl font-bold font-hand">强同步联机对战大厅</h2>
+                        <p class="text-base text-sketch-ink/70">这里是真正的同屏对决！你作答时，伴侣能实时看到你的进度反馈。</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="font-bold font-hand text-lg text-sketch-accent"><i class="fa-solid fa-paper-plane"></i> 发起挑战</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">生成带有你名字的实时对战网址，伴侣点击即可瞬间跨时空进入房间。</p>
+                            </div>
+                            <button onclick="generateLiveInvite()" class="w-full hand-btn bg-sketch-accent text-white py-3 hand-border-sm hand-shadow-sm font-bold text-base tracking-wide">
+                                复制实时联机邀请
+                            </button>
+                        </div>
+                        <div class="p-5 border-2 border-dashed border-sketch-ink/40 rounded-2xl flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="font-bold font-hand text-lg text-sketch-sage"><i class="fa-solid fa-headset"></i> 应战大门</h3>
+                                <p class="text-sm text-sketch-ink/60 mt-1">如果伴侣已经创建了房间，在下方输入Ta登录的花名，即可直接轰炸连线。</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="text" id="peer-id-input" placeholder="输入对方的名字" class="w-full bg-sketch-bg px-4 py-2 hand-border-sm text-sm font-bold focus:outline-none">
+                                <button onclick="connectToPeerFromInput()" class="hand-btn bg-sketch-sage text-white px-5 hand-border-sm hand-shadow-sm font-bold text-sm shrink-0">连线</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="connection-status" class="bg-sketch-bg p-4 hand-border-sm text-sm font-hand text-center text-sketch-ink/60">
+                        📡 当前云端通信雷达：正在等待连线指令...
+                    </div>
+
+                    <div id="host-start-panel" class="hidden text-center pt-4">
+                        <button onclick="hostInitiateGame()" class="w-full hand-btn bg-sketch-ink text-white py-4 hand-border-sm hand-shadow font-bold text-lg tracking-widest">
+                            🔥 伴侣已就位，开启强同步对决！
+                        </button>
+                    </div>
+                </div>
+
+                <div id="pk-arena" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow space-y-6">
+                    <div class="grid grid-cols-3 items-center text-center pb-4 border-b-2 border-sketch-ink/20 font-hand">
+                        <div>
+                            <p class="text-sm text-sketch-ink/50 font-bold uppercase">我 (<span id="arena-my-name">Me</span>)</p>
+                            <p id="arena-my-score" class="text-5xl font-bold text-sketch-sky font-mono mt-1">0</p>
+                            <p id="my-status-tag" class="text-xs text-sketch-sage mt-1 font-bold">思考中 ✏️</p>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="bg-sketch-accent text-white text-base px-3 py-1.5 hand-border-sm hand-shadow-sm font-bold tracking-widest animate-pulse" id="pk-timer-badge">60s</span>
+                            <p class="text-xs text-sketch-ink/40 mt-1" id="combo-tracker">Combo: 0</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-sketch-ink/50 font-bold uppercase">伴侣 (<span id="arena-opp-name">Opp</span>)</p>
+                            <p id="arena-opp-score" class="text-5xl font-bold text-sketch-accent font-mono mt-1">0</p>
+                            <p id="opp-status-tag" class="text-xs text-sketch-accent mt-1 font-bold">思考中 ✏️</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full bg-sketch-bg h-3.5 hand-border-sm overflow-hidden">
+                        <div id="pk-progress" class="bg-sketch-accent h-full w-full transition-all duration-1000 linear"></div>
+                    </div>
+
+                    <div class="text-center py-4 space-y-2">
+                        <p class="text-xs font-hand text-sketch-ink/50 font-bold tracking-widest" id="sync-q-index">第 1 题</p>
+                        <h3 id="pk-question" class="text-4xl font-bold font-hand text-sketch-ink">Meticulous</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4" id="pk-options">
+                        </div>
+
+                    <div id="arena-waiting-overlay" class="hidden text-center text-sm font-hand font-bold text-sketch-accent animate-bounce">
+                        💡 你已作答，正在苦苦等待对方下笔...
+                    </div>
+                </div>
+
+                <div id="pk-summary" class="hidden bg-sketch-paper p-6 md:p-8 hand-border hand-shadow text-center space-y-6">
+                    <h2 class="text-4xl font-hand font-bold text-sketch-accent" id="summary-title">比赛结束！</h2>
+                    <p id="summary-text" class="text-lg font-hand text-sketch-ink/80 px-4">正在载入战报...</p>
+
+                    <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto py-2">
+                        <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">我的最终总分</p>
+                            <p id="sum-my-score" class="text-4xl font-bold font-mono text-sketch-sky mt-1">0</p>
+                        </div>
+                        <div class="bg-sketch-bg p-4 hand-border-sm hand-shadow-sm">
+                            <p class="text-sm font-hand font-bold text-sketch-ink/50">对方最终总分</p>
+                            <p id="sum-opp-score" class="text-4xl font-bold font-mono text-sketch-accent mt-1">0</p>
+                        </div>
+                    </div>
+
+                    <button onclick="quitToLobby()" class="hand-btn bg-sketch-ink text-white px-10 py-3.5 hand-border-sm hand-shadow-sm text-base font-bold tracking-wider">
+                        返回大厅再次切磋
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="w-full text-center py-6 text-xs font-hand text-sketch-ink/40 tracking-wider mt-auto">
+        <span>🎨 Hand-drawn Romantic Studio © 2026.</span>
+    </footer>
+
+    <script>
+
+        let wordList = [];
+
+        let myRegisteredName = "";
+        let myPeerId = "";
+        let opponentName = "对方";
+        let currentStudyIdx = 0;
+        let isCardFlipped = false;
+
+        // ===== 好友 PK：PeerJS P2P 联机核心状态 =====
+        // 说明：GitHub Pages 是静态网页，不能自己保存“房间状态”。
+        // 这里用 PeerJS 做 WebRTC 数据通道：房主浏览器负责出题、推进回合、结算时间。
+        let peer = null;
+        let p2pConnection = null;
+        let connectionReady = false;
+        let isHost = false;
+
+        let pkTimer = null;
+        let nextRoundTimeout = null;
+        let pkTimeLeft = 60;
+        let pkTotalTime = 60;
+
+        let currentMatchId = "";
+        let matchQuestionIndices = [];
+        let currentRoundNumber = 0;
+        let currentQuestionData = null;
+        let roundStartTimestamp = 0;
+        let roundResolved = false;
+
+        let myPkScore = 0;
+        let oppPkScore = 0;
+        let currentPkCombo = 0;
+
+        let IHaveAnswered = false;
+        let oppHasAnswered = false;
+        let myAnswerPayload = null;
+        let oppAnswerPayload = null;
+
+        window.onload = async function() {
+            try {
+                const response = await fetch('words.json');
+                if (!response.ok) throw new Error('未能成功加载 words.json');
+                wordList = await response.json();
+                if (!Array.isArray(wordList) || wordList.length === 0) {
+                    throw new Error('words.json 内容为空或格式错误');
+                }
+                showToast(`📚 词库加载完成，共 ${wordList.length} 个单词`);
+                renderCard();
+            } catch (e) {
+                console.error(e);
+                showToast("⚠️ 未找到 words.json，已启用内置演示词库。部署时请把 words.json 放在同级目录。");
+                wordList = [
+                    { word: "meticulous", phonetic: "/məˈtɪkjələs/", translation: "一丝不苟的；极细致的", example: "She kept meticulous records of every experiment.", exChn: "她对每一次实验都做了极其细致的记录。" },
+                    { word: "coherent", phonetic: "/koʊˈhɪrənt/", translation: "连贯的；有条理的", example: "The argument is clear and coherent.", exChn: "这个论证清晰且连贯。" },
+                    { word: "mitigate", phonetic: "/ˈmɪtɪɡeɪt/", translation: "减轻；缓和", example: "Trees can mitigate the heat island effect.", exChn: "树木可以缓解热岛效应。" },
+                    { word: "plausible", phonetic: "/ˈplɔːzəbl/", translation: "看似合理的；可信的", example: "That is a plausible explanation.", exChn: "那是一个看似合理的解释。" },
+                    { word: "resilient", phonetic: "/rɪˈzɪliənt/", translation: "有恢复力的；有韧性的", example: "The system is resilient under pressure.", exChn: "该系统在压力下具有韧性。" },
+                    { word: "substantial", phonetic: "/səbˈstænʃl/", translation: "大量的；实质性的", example: "The project requires substantial investment.", exChn: "该项目需要大量投资。" }
+                ];
+                renderCard();
+            }
+
+            const saved = localStorage.getItem('love_pk_my_username');
+            if (saved) document.getElementById('username-input').value = saved;
+
+            const peerInput = document.getElementById('peer-id-input');
+            if (peerInput) peerInput.placeholder = "粘贴对方邀请链接 / 邀请码";
+        };
+
+        function safeText(value, fallback = "") {
+            if (value === undefined || value === null || String(value).trim() === "") return fallback;
+            return String(value);
+        }
+
+        function randomToken(length = 8) {
+            const raw = new Uint32Array(2);
+            if (window.crypto && window.crypto.getRandomValues) {
+                window.crypto.getRandomValues(raw);
+                return Array.from(raw).map(n => n.toString(36)).join('').slice(0, length);
+            }
+            return Math.random().toString(36).slice(2, 2 + length);
+        }
+
+        function makePeerId() {
+            return `love-vocab-pk-${Date.now().toString(36)}-${randomToken(10)}`;
+        }
+
+        // ===== 登录与 Peer 注册 =====
+        function registerUser() {
+            const input = document.getElementById('username-input').value.trim();
+            if (!input) {
+                showToast("⚠️ 名字不能为空。");
+                return;
+            }
+
+            if (peer && !peer.destroyed) {
+                try { peer.destroy(); } catch (e) {}
+            }
+
+            myRegisteredName = input;
+            myPeerId = makePeerId();
+
+            const status = document.getElementById('connection-status');
+            if (status) status.innerText = "📡 正在注册临时联机身份...";
+
+            peer = new Peer(myPeerId, {
+                debug: 1
+            });
+
+            peer.on('open', function(id) {
+                myPeerId = id;
+                localStorage.setItem('love_pk_my_username', myRegisteredName);
+
+                document.getElementById('sec-login').classList.add('hidden');
+                document.getElementById('main-dashboard').classList.remove('hidden');
+                document.getElementById('user-badge').classList.remove('hidden');
+                document.getElementById('display-my-name').innerText = myRegisteredName;
+                document.getElementById('arena-my-name').innerText = myRegisteredName;
+                document.getElementById('connection-status').innerHTML =
+                    `📡 已上线。点击“复制实时联机邀请”发给对方。<br><span class="text-xs opacity-70">本次邀请码：${myPeerId}</span>`;
+
+                showToast("✅ 已进入大厅，可以发起或接受 PK。");
+                checkUrlInvitation();
+            });
+
+            peer.on('connection', function(conn) {
+                if (p2pConnection && p2pConnection.open) {
+                    conn.on('open', () => {
+                        conn.send({ type: 'BUSY', message: '对方已经在一场连接中。' });
+                        setTimeout(() => conn.close(), 300);
+                    });
+                    return;
+                }
+
+                isHost = true;
+                p2pConnection = conn;
+                attachConnection(conn);
+            });
+
+            peer.on('error', function(err) {
+                console.error(err);
+                let msg = "❌ 联机注册失败，请刷新页面重试。";
+                if (err && err.type === 'network') msg = "❌ PeerJS 信令服务器连接失败，可能是网络或浏览器拦截。";
+                if (err && err.type === 'peer-unavailable') msg = "❌ 没找到对方，请确认邀请链接来自正在打开的页面。";
+                showToast(msg);
+                const status = document.getElementById('connection-status');
+                if (status) status.innerText = msg;
+            });
+
+            peer.on('disconnected', function() {
+                showToast("⚠️ 联机信令暂时断开，正在尝试重连。");
+                try { peer.reconnect(); } catch (e) {}
+            });
+        }
+
+        function attachConnection(conn) {
+            connectionReady = false;
+
+            const markOpen = () => {
+                if (connectionReady) return;
+                connectionReady = true;
+
+                sendData({
+                    type: 'HELLO',
+                    name: myRegisteredName,
+                    peerId: myPeerId
+                });
+
+                document.getElementById('connection-status').innerHTML = "🟩 已建立数据通道，等待双方身份确认...";
+            };
+
+            conn.on('open', markOpen);
+
+            // 兼容少数情况下 open 事件已经触发的情况
+            setTimeout(() => {
+                if (conn.open) markOpen();
+            }, 250);
+
+            conn.on('data', handlePeerData);
+
+            conn.on('close', function() {
+                showToast("📡 对方已离线，对战连接结束。");
+                resetConnectionButKeepIdentity();
+                quitToLobby();
+            });
+
+            conn.on('error', function(err) {
+                console.error(err);
+                showToast("❌ 联机通道异常，请重新复制邀请链接。");
+                resetConnectionButKeepIdentity();
+                quitToLobby();
+            });
+        }
+
+        function handlePeerData(data) {
+            if (!data || !data.type) return;
+
+            switch (data.type) {
+                case 'BUSY':
+                    showToast(data.message || "对方正在连接中。");
+                    break;
+
+                case 'HELLO':
+                    opponentName = safeText(data.name, "对方");
+                    document.getElementById('arena-opp-name').innerText = opponentName;
+                    document.getElementById('connection-status').innerHTML =
+                        `🟩 已与【${opponentName}】连线成功。${isHost ? "你是房主，可以开始比赛。" : "等待房主开始比赛。"}`;
+
+                    if (isHost) {
+                        document.getElementById('host-start-panel').classList.remove('hidden');
+                    } else {
+                        document.getElementById('host-start-panel').classList.add('hidden');
+                    }
+
+                    sendData({
+                        type: 'HELLO_ACK',
+                        name: myRegisteredName,
+                        peerId: myPeerId
+                    });
+                    break;
+
+                case 'HELLO_ACK':
+                    opponentName = safeText(data.name, "对方");
+                    document.getElementById('arena-opp-name').innerText = opponentName;
+                    document.getElementById('connection-status').innerHTML =
+                        `🟩 已与【${opponentName}】连线成功。${isHost ? "你是房主，可以开始比赛。" : "等待房主开始比赛。"}`;
+
+                    if (isHost) {
+                        document.getElementById('host-start-panel').classList.remove('hidden');
+                    }
+                    break;
+
+                case 'HOST_START_GAME':
+                    if (isHost) return;
+                    currentMatchId = data.matchId;
+                    matchQuestionIndices = Array.isArray(data.questionIndices) ? data.questionIndices : [];
+                    pkTotalTime = Number(data.totalTime || 60);
+                    triggerStartPkGameView();
+                    showToast("🔥 房主已开赛。");
+                    break;
+
+                case 'ROUND_DATA':
+                    if (data.matchId !== currentMatchId) return;
+                    currentRoundNumber = Number(data.roundNumber || 0);
+                    currentQuestionData = data.roundData;
+                    renderSyncQuestionUI();
+                    break;
+
+                case 'ANSWER_SUBMITTED':
+                    if (data.matchId !== currentMatchId) return;
+                    if (Number(data.roundNumber) !== currentRoundNumber) return;
+
+                    oppHasAnswered = true;
+                    oppAnswerPayload = data;
+                    oppPkScore = Number(data.totalScore || 0);
+
+                    document.getElementById('arena-opp-score').innerText = oppPkScore;
+                    document.getElementById('opp-status-tag').innerText =
+                        data.correct ? `已答对 +${data.points}` : "已作答";
+                    document.getElementById('opp-status-tag').className =
+                        data.correct
+                            ? "text-xs text-sketch-sage mt-1 font-bold animate-bounce"
+                            : "text-xs text-sketch-accent mt-1 font-bold";
+
+                    checkRoundResolution();
+                    break;
+
+                case 'MATCH_END':
+                    if (data.matchId && data.matchId !== currentMatchId) return;
+                    if (typeof data.totalScore === "number") {
+                        oppPkScore = data.totalScore;
+                        document.getElementById('arena-opp-score').innerText = oppPkScore;
+                    }
+                    handleMatchEnded(data.reason || "time");
+                    break;
+            }
+        }
+
+        function sendData(obj) {
+            if (p2pConnection && p2pConnection.open) {
+                p2pConnection.send(obj);
+                return true;
+            }
+            return false;
+        }
+
+        function resetConnectionButKeepIdentity() {
+            if (pkTimer) clearInterval(pkTimer);
+            if (nextRoundTimeout) clearTimeout(nextRoundTimeout);
+            pkTimer = null;
+            nextRoundTimeout = null;
+            p2pConnection = null;
+            connectionReady = false;
+            isHost = false;
+            currentMatchId = "";
+            document.getElementById('host-start-panel').classList.add('hidden');
+            document.getElementById('connection-status').innerHTML =
+                `📡 已上线。点击“复制实时联机邀请”发给对方。<br><span class="text-xs opacity-70">本次邀请码：${myPeerId}</span>`;
+        }
+
+        // ===== 邀请与连接 =====
+        function generateLiveInvite() {
+            if (!myRegisteredName || !peer || !myPeerId) {
+                showToast("请先输入名字进入大厅。");
+                return;
+            }
+
+            isHost = true;
+            const inviteUrl =
+                `${window.location.origin}${window.location.pathname}?hostPeer=${encodeURIComponent(myPeerId)}&hostName=${encodeURIComponent(myRegisteredName)}`;
+
+            navigator.clipboard.writeText(inviteUrl).then(() => {
+                showToast("📋 邀请链接已复制。把它发给对方，对方打开后输入自己的名字即可加入。");
+            }).catch(() => {
+                prompt("请手动复制这个邀请链接发给对方：", inviteUrl);
+            });
+
+            document.getElementById('connection-status').innerHTML =
+                `📨 已生成邀请。保持本页面打开，等待对方加入。<br><span class="text-xs opacity-70">邀请码：${myPeerId}</span>`;
+        }
+
+        function parsePeerIdFromInput(raw) {
+            const value = raw.trim();
+            if (!value) return "";
+
+            try {
+                const url = new URL(value);
+                return url.searchParams.get('hostPeer') || url.searchParams.get('invite') || value;
+            } catch (e) {
+                return value;
+            }
+        }
+
+        function connectToPeerFromInput() {
+            const raw = document.getElementById('peer-id-input').value.trim();
+            const targetPeerId = parsePeerIdFromInput(raw);
+
+            if (!targetPeerId) {
+                showToast("请粘贴对方发来的邀请链接或邀请码。");
+                return;
+            }
+
+            if (!peer || !myPeerId) {
+                showToast("请先输入自己的名字进入大厅。");
+                return;
+            }
+
+            if (targetPeerId === myPeerId) {
+                showToast("不能连接自己。");
+                return;
+            }
+
+            if (p2pConnection && p2pConnection.open) {
+                showToast("你已经在一个联机房间中。");
+                return;
+            }
+
+            isHost = false;
+            document.getElementById('host-start-panel').classList.add('hidden');
+            document.getElementById('connection-status').innerText = "🚀 正在连接对方房间...";
+
+            p2pConnection = peer.connect(targetPeerId, {
+                reliable: true
+            });
+            attachConnection(p2pConnection);
+        }
+
+        function checkUrlInvitation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hostPeer = urlParams.get('hostPeer') || urlParams.get('invite');
+            const hostName = urlParams.get('hostName');
+
+            if (hostName && hostName !== myRegisteredName) {
+                opponentName = hostName;
+                document.getElementById('arena-opp-name').innerText = hostName;
+            }
+
+            if (hostPeer && hostPeer !== myPeerId) {
+                switchTab('pk');
+                document.getElementById('peer-id-input').value = hostPeer;
+                showToast(`🔔 检测到来自【${hostName || "对方"}】的挑战邀请，正在连接...`);
+                connectToPeerFromInput();
+            }
+        }
+
+        // ===== 比赛控制：房主权威出题、权威结算 =====
+        function hostInitiateGame() {
+            if (!isHost) {
+                showToast("只有发起邀请的一方可以开始比赛。");
+                return;
+            }
+            if (!p2pConnection || !p2pConnection.open) {
+                showToast("对方还没有连进来。");
+                return;
+            }
+            if (!Array.isArray(wordList) || wordList.length < 4) {
+                showToast("词库至少需要 4 个单词才能生成选择题。");
+                return;
+            }
+
+            currentMatchId = `match-${Date.now()}-${randomToken(6)}`;
+            currentRoundNumber = 0;
+            matchQuestionIndices = shuffledWordIndices();
+
+            sendData({
+                type: 'HOST_START_GAME',
+                matchId: currentMatchId,
+                totalTime: 60,
+                questionIndices: matchQuestionIndices
+            });
+
+            triggerStartPkGameView();
+
+            setTimeout(() => {
+                hostGenerateNextRound();
+            }, 350);
+        }
+
+        function shuffledWordIndices() {
+            const indices = Array.from({ length: wordList.length }, (_, i) => i);
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            return indices;
+        }
+
+        function hostGenerateNextRound() {
+            if (!isHost || pkTimeLeft <= 0) return;
+            if (!matchQuestionIndices.length) matchQuestionIndices = shuffledWordIndices();
+
+            if (currentRoundNumber >= matchQuestionIndices.length) {
+                matchQuestionIndices = shuffledWordIndices();
+                currentRoundNumber = 0;
+            }
+
+            currentQuestionData = buildRoundData(matchQuestionIndices[currentRoundNumber]);
+
+            sendData({
+                type: 'ROUND_DATA',
+                matchId: currentMatchId,
+                roundNumber: currentRoundNumber,
+                roundData: currentQuestionData
+            });
+
+            renderSyncQuestionUI();
+        }
+
+        function buildRoundData(wordIdx) {
+            const correctWord = wordList[wordIdx];
+            const correctTranslation = safeText(correctWord.translation, "暂无释义");
+
+            const options = [correctTranslation];
+            let guard = 0;
+            while (options.length < 4 && guard < 200) {
+                guard++;
+                const candidate = wordList[Math.floor(Math.random() * wordList.length)];
+                const trans = safeText(candidate.translation, "");
+                if (trans && !options.includes(trans)) {
+                    options.push(trans);
+                }
+            }
+
+            while (options.length < 4) {
+                options.push(`干扰选项 ${options.length}`);
+            }
+
+            for (let i = options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [options[i], options[j]] = [options[j], options[i]];
+            }
+
+            return {
+                eng: safeText(correctWord.word, "word"),
+                phonetic: safeText(correctWord.phonetic, ""),
+                correct: correctTranslation,
+                options
+            };
+        }
+
+        function triggerStartPkGameView() {
+            document.getElementById('pk-lobby').classList.add('hidden');
+            document.getElementById('pk-summary').classList.add('hidden');
+            document.getElementById('pk-arena').classList.remove('hidden');
+
+            myPkScore = 0;
+            oppPkScore = 0;
+            currentPkCombo = 0;
+            pkTimeLeft = pkTotalTime || 60;
+
+            IHaveAnswered = false;
+            oppHasAnswered = false;
+            myAnswerPayload = null;
+            oppAnswerPayload = null;
+            roundResolved = false;
+
+            document.getElementById('arena-my-name').innerText = myRegisteredName;
+            document.getElementById('arena-opp-name').innerText = opponentName;
+            document.getElementById('arena-my-score').innerText = "0";
+            document.getElementById('arena-opp-score').innerText = "0";
+            document.getElementById('combo-tracker').innerText = "Combo: 0";
+            document.getElementById('pk-timer-badge').innerText = `${pkTimeLeft}s`;
+            document.getElementById('pk-progress').style.width = "100%";
+
+            if (pkTimer) clearInterval(pkTimer);
+            if (nextRoundTimeout) clearTimeout(nextRoundTimeout);
+            startMatchTimer();
+        }
+
+        function startMatchTimer() {
+            const progressBar = document.getElementById('pk-progress');
+            pkTimer = setInterval(() => {
+                pkTimeLeft = Math.max(0, pkTimeLeft - 1);
+                document.getElementById('pk-timer-badge').innerText = `${pkTimeLeft}s`;
+                progressBar.style.width = `${(pkTimeLeft / (pkTotalTime || 60)) * 100}%`;
+
+                if (pkTimeLeft <= 0) {
+                    clearInterval(pkTimer);
+                    lockPkOptions();
+
+                    if (isHost) {
+                        sendData({
+                            type: 'MATCH_END',
+                            matchId: currentMatchId,
+                            reason: 'time',
+                            totalScore: myPkScore
+                        });
+                        handleMatchEnded('time');
+                    } else {
+                        document.getElementById('arena-waiting-overlay').classList.remove('hidden');
+                        document.getElementById('arena-waiting-overlay').innerText = "⏳ 时间到，等待房主结算...";
+                    }
+                }
+            }, 1000);
+        }
+
+        function renderSyncQuestionUI() {
+            if (!currentQuestionData) return;
+
+            if (nextRoundTimeout) {
+                clearTimeout(nextRoundTimeout);
+                nextRoundTimeout = null;
+            }
+
+            IHaveAnswered = false;
+            oppHasAnswered = false;
+            myAnswerPayload = null;
+            oppAnswerPayload = null;
+            roundResolved = false;
+            roundStartTimestamp = Date.now();
+
+            document.getElementById('arena-waiting-overlay').classList.add('hidden');
+            document.getElementById('arena-waiting-overlay').innerText = "💡 你已作答，正在等待对方...";
+            document.getElementById('sync-q-index').innerText = `第 ${currentRoundNumber + 1} 题`;
+            document.getElementById('pk-question').innerText = currentQuestionData.eng;
+
+            document.getElementById('my-status-tag').innerText = "思考中 ✏️";
+            document.getElementById('my-status-tag').className = "text-xs text-sketch-ink/50 mt-1 font-bold";
+            document.getElementById('opp-status-tag').innerText = "思考中 ✏️";
+            document.getElementById('opp-status-tag').className = "text-xs text-sketch-ink/50 mt-1 font-bold";
+
+            const optsDiv = document.getElementById('pk-options');
+            optsDiv.innerHTML = '';
+
+            currentQuestionData.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 bg-sketch-paper hand-border-sm hand-shadow-sm text-xl font-hand font-bold smooth-transition hover:bg-sketch-bg flex justify-between items-center group";
+                btn.innerHTML = `<span>${escapeHtml(opt)}</span><i class="fa-regular fa-pencil text-sketch-ink/20 group-hover:text-sketch-accent transition-colors"></i>`;
+                btn.onclick = () => submitMySyncAnswer(btn, opt);
+                optsDiv.appendChild(btn);
+            });
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function lockPkOptions() {
+            const allBtns = document.getElementById('pk-options').querySelectorAll('button');
+            allBtns.forEach(b => b.disabled = true);
+        }
+
+        function submitMySyncAnswer(btnElement, chosenText) {
+            if (IHaveAnswered || !currentQuestionData || pkTimeLeft <= 0) return;
+
+            IHaveAnswered = true;
+            lockPkOptions();
+
+            const answerMs = Math.max(0, Date.now() - roundStartTimestamp);
+            const correct = chosenText === currentQuestionData.correct;
+
+            let points = 0;
+            if (correct) {
+                currentPkCombo++;
+                const speedBonus = Math.max(0, 10 - Math.floor(answerMs / 1000));
+                const comboBonus = currentPkCombo >= 3 ? Math.min((currentPkCombo - 2) * 2, 10) : 0;
+                points = 10 + speedBonus + comboBonus;
+                myPkScore += points;
+                document.getElementById('combo-tracker').innerText = `Combo: 🔥 ${currentPkCombo}`;
+                btnElement.classList.add('text-sketch-sage');
+                btnElement.style.borderColor = '#2A9D8F';
+                btnElement.querySelector('i').className = "fa-solid fa-circle-check text-sketch-sage text-lg";
+            } else {
+                currentPkCombo = 0;
+                document.getElementById('combo-tracker').innerText = "Combo: 0";
+                btnElement.classList.add('text-sketch-accent');
+                btnElement.style.borderColor = '#E76F51';
+                btnElement.querySelector('i').className = "fa-solid fa-circle-xmark text-sketch-accent text-lg";
+            }
+
+            myAnswerPayload = {
+                type: 'ANSWER_SUBMITTED',
+                matchId: currentMatchId,
+                roundNumber: currentRoundNumber,
+                choice: chosenText,
+                correct,
+                points,
+                totalScore: myPkScore,
+                answerMs
+            };
+
+            document.getElementById('arena-my-score').innerText = myPkScore;
+            document.getElementById('my-status-tag').innerText = correct ? `答对 +${points}` : "答错";
+            document.getElementById('my-status-tag').className = correct
+                ? "text-xs text-sketch-sage mt-1 font-bold"
+                : "text-xs text-sketch-accent mt-1 font-bold";
+            document.getElementById('arena-waiting-overlay').classList.remove('hidden');
+
+            sendData(myAnswerPayload);
+            checkRoundResolution();
+        }
+
+        function checkRoundResolution() {
+            if (roundResolved) return;
+
+            if (IHaveAnswered && oppHasAnswered) {
+                roundResolved = true;
+                document.getElementById('arena-waiting-overlay').classList.add('hidden');
+
+                revealCorrectAnswer();
+
+                if (isHost && pkTimeLeft > 0) {
+                    nextRoundTimeout = setTimeout(() => {
+                        currentRoundNumber++;
+                        hostGenerateNextRound();
+                    }, 1200);
+                }
+            }
+        }
+
+        function revealCorrectAnswer() {
+            const allBtns = document.getElementById('pk-options').querySelectorAll('button');
+            allBtns.forEach(b => {
+                const text = b.querySelector('span').innerText;
+                if (text === currentQuestionData.correct) {
+                    b.style.borderColor = '#2A9D8F';
+                    b.classList.add('bg-sketch-sage/20');
+                    b.querySelector('i').className = "fa-solid fa-circle-check text-sketch-sage text-lg";
+                }
+            });
+        }
+
+        function handleMatchEnded(reason) {
+            if (pkTimer) clearInterval(pkTimer);
+            if (nextRoundTimeout) clearTimeout(nextRoundTimeout);
+            pkTimer = null;
+            nextRoundTimeout = null;
+
+            document.getElementById('pk-arena').classList.add('hidden');
+            document.getElementById('pk-summary').classList.remove('hidden');
+
+            document.getElementById('sum-my-score').innerText = myPkScore;
+            document.getElementById('sum-opp-score').innerText = oppPkScore;
+
+            let winText = "";
+            if (myPkScore > oppPkScore) {
+                winText = `🏆 你赢了！本局 ${myPkScore} : ${oppPkScore}。速度、正确率和连击都算入了得分。`;
+            } else if (myPkScore < oppPkScore) {
+                winText = `本局 ${myPkScore} : ${oppPkScore}，对方获胜。可以再来一局刷回去。`;
+            } else {
+                winText = `平局！本局 ${myPkScore} : ${oppPkScore}。`;
+            }
+
+            document.getElementById('summary-title').innerText = reason === 'time' ? "时间到，比赛结束！" : "比赛结束！";
+            document.getElementById('summary-text').innerText = winText;
+        }
+
+        function quitToLobby() {
+            if (pkTimer) clearInterval(pkTimer);
+            if (nextRoundTimeout) clearTimeout(nextRoundTimeout);
+            pkTimer = null;
+            nextRoundTimeout = null;
+
+            document.getElementById('pk-summary').classList.add('hidden');
+            document.getElementById('pk-arena').classList.add('hidden');
+            document.getElementById('pk-lobby').classList.remove('hidden');
+
+            if (p2pConnection && p2pConnection.open && isHost) {
+                document.getElementById('host-start-panel').classList.remove('hidden');
+            }
+        }
+
+        // ===== 自由背单词逻辑 =====
+        function switchTab(target) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`sec-${target}`).classList.remove('hidden');
+        }
+
+        function renderCard() {
+            if (!Array.isArray(wordList) || wordList.length === 0) return;
+
+            const word = wordList[currentStudyIdx];
+            const idxStr = `${String(currentStudyIdx + 1).padStart(3, '0')} / ${wordList.length}`;
+
+            const fc = document.getElementById('flashcard');
+            fc.classList.remove('rotate-y-180');
+            isCardFlipped = false;
+
+            setTimeout(() => {
+                document.getElementById('study-index-1').innerText = idxStr;
+                document.getElementById('study-index-2').innerText = idxStr;
+                document.getElementById('word-eng').innerText = safeText(word.word, "word");
+                document.getElementById('word-phonetic').innerText = safeText(word.phonetic, "/ ... /");
+                document.getElementById('word-chn').innerText = safeText(word.translation, "暂无释义");
+                document.getElementById('word-ex-eng').innerText = `"${safeText(word.example, "No example yet.")}"`;
+                document.getElementById('word-ex-chn').innerText = safeText(word.exChn, "暂无例句翻译。");
+                document.getElementById('study-progress').innerText = `${currentStudyIdx + 1} / ${wordList.length}`;
+            }, 150);
+        }
+
+        function flipCard() {
+            if (!Array.isArray(wordList) || wordList.length === 0) return;
+            isCardFlipped = !isCardFlipped;
+            const fc = document.getElementById('flashcard');
+            if (isCardFlipped) fc.classList.add('rotate-y-180');
+            else fc.classList.remove('rotate-y-180');
+        }
+
+        function prevCard() {
+            if (!Array.isArray(wordList) || wordList.length === 0) return;
+            currentStudyIdx = (currentStudyIdx - 1 + wordList.length) % wordList.length;
+            renderCard();
+        }
+
+        function nextCard() {
+            if (!Array.isArray(wordList) || wordList.length === 0) return;
+            currentStudyIdx = (currentStudyIdx + 1) % wordList.length;
+            renderCard();
+        }
+
+        function speakWord(event) {
+            event.stopPropagation();
+            if (!Array.isArray(wordList) || wordList.length === 0) return;
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(safeText(wordList[currentStudyIdx].word, ""));
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 3000);
+        }
+
+    </script>
+</body>
+</html>
 
